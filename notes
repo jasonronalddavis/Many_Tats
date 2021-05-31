@@ -1,0 +1,22 @@
+User
+
+Artist
+
+has many users
+has many tats
+
+Appointments
+
+
+
+
+
+Tat
+color:
+if 1(colors) + 20% if 2(colors) + 40 if 3(colors) + 60%
+has many users
+has many artists
+size
+2 x 3 inches
+
+
