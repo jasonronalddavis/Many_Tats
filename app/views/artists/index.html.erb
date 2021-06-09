@@ -1,0 +1,16 @@
+<h1>Here are all the artists: </h1>
+<ul>
+    <% if current_user.admin %>
+        <%= link_to "New Artist", artists_new_path %>
+    <% end %>
+    <% @artists.each do |artist| %>
+        <li><%= artist.name %></li>
+        <li><%= artist.rating %></li>
+
+    <% if current_user.admin %>
+        <%= link_to "Show #{artist.name}", artist_path(artist) %>
+    <% else %>
+        <%= link_to "Go on #{artist.name}", artist_path(artist) %>
+    <% end %>
+        <% end %>
+</ul>

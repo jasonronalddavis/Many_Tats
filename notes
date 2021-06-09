@@ -19,4 +19,4 @@ has many artists
 size
 2 x 3 inches
 
-
+--no-helper --no-assets --no-controller-specs --no-view-specs

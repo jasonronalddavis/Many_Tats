@@ -1,2 +1,23 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+
+<%= User %><br><br>
+
+<%= @user.name %>
+<br>
+<br>
+
+
+<%=  @user.tats.each do |tat| %>
+
+<%= link_to tat.name, user_tats_path(tat) %>
+
+<% end %><br>
+
+
+
+
+<%= link_to "SIGN OUT", signout_path, method: 'delete' %>
+<br>
+
+<%= link_to "Return home", root_path %>
+
+<br>

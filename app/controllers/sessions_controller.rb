@@ -1,9 +1,20 @@
 class SessionsController < ApplicationController
+  
+  helper_method :Artist?
+  
+  
+  
+  
+  
+  
   def new
+
     if !logged_in?
+    @artist = Artist.new
     @user = User.new
+    render :new
     else
-      redirect_to toot_path
+      redirect_to root_path
     end
 end
 
@@ -15,31 +26,11 @@ def create
     else
         render :new
     end
+  end
 
-
-private
-
-def auth
-  @user = User.find_or_create_by(user_id: request.env['omniauth.auth'][:user_id], provider: request.env['omniauth.auth'][:provider]) do |u|
-  u.username = request.env['omniauth.auth'][:info][:first_name]
-  u.email = request.env['omniauth.auth'][:info][:email]
-  u.password = SecureRandom.hex(15)
-end
-if user.valid?
-sessions[:user_id] = @user.id
-redirect_to root_path
-else
-  redirect_to login_path
-end
-end
-
-
-def destroy
-    # binding.pry
+  def destroy
+    
     session.delete :user_id
-    redirect_to root_path
-end
-
-end
-
+        redirect_to root_path    
+  end
 end

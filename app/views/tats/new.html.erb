@@ -1,0 +1,12 @@
+<%= form_for(@user.tats) do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <br>
+    <%= label_tag :name %>
+    <%= collection_select :artist, :name, Artist.all, :name, :name %>
+    <br>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+    <br>
+    <%= submit_tag "Create Tat" %>
+<% end %>

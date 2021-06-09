@@ -1,14 +1,29 @@
 Rails.application.routes.draw do
   
-get 'application/welcome'
-get '/signup', to: 'users#new'
-post '/signup', to: 'users#create'
-get '/login', to: 'sessions#new'
-match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
-post '/login', to: 'sessions#create'
-get '/logout', to: 'sessions#destroy'
-root 'welcome#home'
+ 
+  
+  get 'sessions/new'
+ # get 'sessions/destroy'
+  root to: 'application#welcome'
+  get '/signin', to: 'sessions#new', as: 'signin'
+  post '/signin', to: 'sessions#create', as: 'session'
+  
+  
+ 
 
-resources :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+devise_for :artists
+resources :artists
+
+
+scope '/admin' do
+  resources :users do
+    resources :tats, only: [:new, :create]
 end
+end
+
+
+resources :tats
+
+  delete '/signout', to: 'sessions#destroy'
+end
+

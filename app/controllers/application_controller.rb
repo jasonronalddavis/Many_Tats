@@ -1,19 +1,23 @@
 class ApplicationController < ActionController::Base
 
-    before_action :authenticate_admin!
+
 
 protect_from_forgery with: :exception
-  helper_method :current_user, :logged_in?, :authenticate_user
+helper_method :current_user, :logged_in?, :authenticate_user
 
 
 
 
   
   def welcome
-   #binding.pry
+
+    if logged_in?
     @user = User.find(session[:user_id])
-    
+
   end
+  end
+
+  
 
   private
 
@@ -29,9 +33,11 @@ protect_from_forgery with: :exception
   def authenticate_user
       redirect_to root_path unless logged_in?
   end
+
   def logout
     session.clear
     redirect_to  root_path
   end
+
 
 end
