@@ -17,11 +17,12 @@ resources :artists
 
 scope '/admin' do
   resources :users do
+    devise_for :tats
     resources :tats, only: [:new, :create]
 end
 end
 
-
+devise_for :tats
 resources :tats
 
   delete '/signout', to: 'sessions#destroy'

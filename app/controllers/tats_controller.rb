@@ -5,13 +5,11 @@ class TatsController < ApplicationController
 def new
   @user = User.find(session[:user_id])
   @tat = @user.tats.new(tat_params)
-
 end
 
 
    
   def create
-    binding.pry
     @user = User.find(session[:user_id])
     @tat = @user.tats.build(tat_params)
      
@@ -36,7 +34,6 @@ end
   
 
 
-  private
   
   def destroy
     sessions.clear
@@ -44,6 +41,6 @@ end
   end
 
     def tat_params
-        params.permit(:tat, :user_id, :description, :name, :color_range, :artist_id)
+      params.permit( :tat, :description, :name, :artist, :color_range, :artist_id)
     end
 end
