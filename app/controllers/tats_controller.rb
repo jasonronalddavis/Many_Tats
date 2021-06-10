@@ -41,6 +41,6 @@ end
   end
 
     def tat_params
-      params.permit( :tat, :description, :name, :artist, :color_range, :artist_id)
+      params.permit
     end
 end
