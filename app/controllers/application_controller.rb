@@ -13,7 +13,7 @@ helper_method :current_user, :logged_in?, :authenticate_user
 
     if logged_in?
     @user = User.find(session[:user_id])
-
+    @artists = Artist.all
   end
   end
 

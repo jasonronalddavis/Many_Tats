@@ -3,16 +3,19 @@ class TatsController < ApplicationController
 
 
 def new
+binding.pry
   @user = User.find(session[:user_id])
   @tat = @user.tats.new(tat_params)
+  @artists = Artist.all
 end
 
 
    
   def create
+    raise params.inspect
     @user = User.find(session[:user_id])
     @tat = @user.tats.build(tat_params)
-     
+    @artists = Artist.all
         redirect_to user_path(current_user)
     end
 
@@ -40,7 +43,9 @@ end
     redirect_to application_path
   end
 
-    def tat_params
-      params.permit
-    end
+private 
+    def tat_params 
+      params.require(:tat).permit(:artist_id, :name, :tats, :description)
+end
+
 end
