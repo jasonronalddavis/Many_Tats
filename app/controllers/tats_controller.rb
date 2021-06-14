@@ -3,17 +3,17 @@ class TatsController < ApplicationController
   
 
 def new
-
-  @user = User.find(session[:user_id])
+#binding.pry
+  @user = current_user
   @tat = @user.tats.new(tat_params)  
   @artists = Artist.all
-  raise params.inspect 
+
 end
 
 
    
   def create
-    raise params.inspect
+   #binding.pry
     @user = User.find(session[:user_id])
     @tat = @user.tats.build(tat_params)
     @artists = Artist.all
@@ -46,8 +46,8 @@ end
 
 private 
     def tat_params 
-    byebug
-      params.require(:tats).permit(:tat, :artist_id, :name, :tats, :description)
+      binding.pry
+      params.permit( :user_id, :artist_id, :name, :description)
 end
 
 end

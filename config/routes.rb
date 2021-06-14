@@ -14,16 +14,18 @@ Rails.application.routes.draw do
 devise_for :artists
 resources :artists
 
+post 'admin/users/:user_id/tats/new', to: "tats#new"
 
 scope '/admin' do
   resources :users do
     devise_for :tats
-    resources :tats, only: [:new, :create]
+    resources :tats, only: [:new, :create], as: "tat"
+    post 'admin/users/:user_id/tats/new', to: "tats#new"
 end
 end
 
 devise_for :tats
-resources :tats
+resources :tats, as: "tat"
 
   delete '/signout', to: 'sessions#destroy'
 end

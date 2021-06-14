@@ -2,15 +2,15 @@
 
 
 
-<%= form_for  do %>
-    <%= label :name %>
-    <%= text_field :name %>
+<%= form_tag new_user_tat_path(@user), method: "post" do %>
+    <%=  label_tag "name" %>
+    <%= text_field_tag :name %>
     <br>
-    <%= label :name %>
-    <%= collection_select :artist_id, @artists, :id, :name %>
+    <%= label_tag :name %>
+    <%= collection_select :artist_id, :name, @artists, :name, :name%>
     <br>
-    <%= label :description %>
-    <%= text_area :description %>
+    <%= label_tag :description %>
+    <%= text_area_tag :description %>
     <br>
-    <%= submit_tag "Create Tat" %>
+    <%= submit_tag "create tat" %>
 <% end %>
