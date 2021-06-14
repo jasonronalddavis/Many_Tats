@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_010320) do
+ActiveRecord::Schema.define(version: 2021_06_14_212653) do
 
   create_table "artists", force: :cascade do |t|
     t.string "name"
@@ -23,10 +23,9 @@ ActiveRecord::Schema.define(version: 2021_06_09_010320) do
 
   create_table "tats", force: :cascade do |t|
     t.string "style"
-    t.integer "color_range"
+    t.string "color_range"
     t.float "price"
-    t.string "tat_size"
-    t.string "array"
+    t.json "tat_size"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.json "all_tats"
@@ -34,6 +33,7 @@ ActiveRecord::Schema.define(version: 2021_06_09_010320) do
     t.integer "artist_id"
     t.integer "user_id"
     t.string "name"
+    t.string "status"
   end
 
   create_table "users", force: :cascade do |t|

@@ -19,13 +19,13 @@ post 'admin/users/:user_id/tats/new', to: "tats#new"
 scope '/admin' do
   resources :users do
     devise_for :tats
-    resources :tats, only: [:new, :create], as: "tat"
+    resources :tats, only: [:new, :create, :index, :show]
     post 'admin/users/:user_id/tats/new', to: "tats#new"
 end
 end
 
 devise_for :tats
-resources :tats, as: "tat"
+resources :tats
 
   delete '/signout', to: 'sessions#destroy'
 end

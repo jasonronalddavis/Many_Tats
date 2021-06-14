@@ -5,7 +5,7 @@ class TatsController < ApplicationController
 def new
 #binding.pry
   @user = current_user
-  @tat = @user.tats.new(tat_params)  
+  @tat = @user.tats.build #({user_id: @user.id})  
   @artists = Artist.all
 
 end
@@ -13,11 +13,12 @@ end
 
    
   def create
-   #binding.pry
+  
     @user = User.find(session[:user_id])
     @tat = @user.tats.build(tat_params)
-    @artists = Artist.all
-        redirect_to user_path(current_user)
+    @tat.save
+    
+        redirect_to user_tat_path(@user, @tat)
     end
 
 
@@ -29,14 +30,13 @@ end
       end
     end
     
+def show
+  @tat = Tat.find(params[:id])
+  @user = User.find_by(id: params[:id])
 
-
-  def show
-    @user = User.find_by(id: params[:id])
-    @tat = @user.tat.find(params[:id])
-  end
+end
+ 
   
-
 
   
   def destroy
@@ -46,8 +46,8 @@ end
 
 private 
     def tat_params 
-      binding.pry
-      params.permit( :user_id, :artist_id, :name, :description)
+     # binding.pry
+      params.require(:tat).permit(:user_id, :artist_id, :style, :name, :description, :color_range)
 end
 
 end
