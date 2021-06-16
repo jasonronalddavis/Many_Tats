@@ -17,12 +17,15 @@ class ArtistsController < ApplicationController
 
 
     def index
-        @artists = Artist.all
+        @user = User.find(session[:user_id])
+        @artists = @user.artists
     end
 
     def show
+        @user = User.find(session[:user_id])
         @artist = Artist.find(params[:id])
-
+        @artist_tats = @artist.tats
+        @user_tats = @user.tats
     end 
 
     def edit

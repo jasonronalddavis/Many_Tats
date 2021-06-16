@@ -21,8 +21,9 @@ class UsersController < ApplicationController
     end
 
     def show
-        @tats = User.find(session[:user_id]).tats
         @user = User.find_by(id: params[:id])
+        @tats = @user.tats
+        @artists = @user.artists
         # binding.pry
         # if current_user.admin == false
         #     if current_user != @user

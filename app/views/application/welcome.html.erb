@@ -9,6 +9,7 @@
  <h1><%= @user.name%> </h1> <br><br><br>
  <%= link_to "Create Tat", new_user_tat_path(@user.id) %><br><br>
  <%= link_to "Log Out", signout_path, method: 'delete'%><br><br>
+ <%= link_to "Users page", user_path(@user), method: 'get'%><br><br>
  
  <%else %>
 <h1> Artist </h1>

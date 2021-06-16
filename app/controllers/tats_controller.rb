@@ -16,17 +16,24 @@ end
   
     @user = User.find(session[:user_id])
     @tat = @user.tats.build(tat_params)
-    @tat.save
-    
-        redirect_to user_tat_path(@user, @tat)
+   if  @tat.save
+    redirect_to user_tat_path(@tat)
+  else
+        rednder :new
     end
+  end
 
 
     def index
       if params[:artist_id]
-        @tats = Artist.find(params[:artist_id]).tats
+        @artist = Artist.find(params[:artist_id])
+        @tats = @artist.tats.all
+        @users = @artist.users
       else
-        @tats = Tat.all
+      #  binding.pry
+      @user = User.find(session[:user_id])
+      @tats = @user.tats
+      @artists = @user.artists
       end
     end
     
@@ -35,8 +42,25 @@ def show
   @user = User.find_by(id: params[:id])
 
 end
- 
-  
+
+
+
+ def edit
+  @user = current_user
+  @artists = Artist.all
+  @tat = Tat.find(params[:id])
+end
+
+def update
+  @user = current_user
+  @tat = @user.tats.build(tat_params)
+  if @tat.save
+    redirect_to user_tat_path(@tat)
+  else
+    render :edit
+  end
+end
+
 
   
   def destroy

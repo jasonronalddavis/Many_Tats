@@ -1,19 +1,15 @@
 
-<%= User %><br><br>
-
-<%= @user.name %>
-<br>
-<br>
 
 
-<%  @user.tats.each do |tat| %>
-
-<%= link_to tat.name, user_tats_path(tat) %>
-
-<% end %><br>
+<h1> User: <%= @user.name %></h1><br><br>
 
 
 
+
+<%= link_to "Users tats",user_tats_path(@tats) %><br><br>
+
+
+<%= link_to "Users artists",user_artists_path(@artists) %><br><br>
 
 <%= link_to "SIGN OUT", signout_path, method: 'delete' %>
 <br>

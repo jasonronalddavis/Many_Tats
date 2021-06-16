@@ -1,9 +1,13 @@
-<%= Artist %><br><br>
-<%= @artist.name %>
 
-<br>
-<br>
+<h1><%= @user.name %>'s Artist</h1><br><br>
 
+
+<h2> Artist Name: <%= @artist.name %></h2><br><br>
+
+<% @artist_tats.each do |tat| %>
+<h2> <%= link_to tat.name, artist_tat_path(@artist, tat) %></h2><br><br>
+
+<%end%>
 
 <%= link_to "SIGN OUT", signout_path, method: 'delete' %>
 <br>
