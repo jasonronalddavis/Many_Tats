@@ -1,4 +1,4 @@
-class ArtistsController < ApplicationController
+class Admin::ArtistsController < ApplicationController
     def new
         @artist = Artist.new
     end
@@ -18,11 +18,11 @@ class ArtistsController < ApplicationController
 
     def index
         @user = User.find(session[:user_id])
-        @artists = Artist.all
+        @artists = @user.artists
     end
 
     def show
-        @user = current_user
+        @user = User.find(session[:user_id])
         @artist = Artist.find(params[:id])
         @artist_tats = @artist.tats
         @user_tats = @user.tats

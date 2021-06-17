@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
 post 'admin/users/:user_id/tats/new', to: "tats#new"
 
-scope '/admin' do
+namespace :admin do
 
   devise_for :artists
   resources :artists do 
@@ -31,7 +31,7 @@ scope '/admin' do
 end
 end
 
-
+resources :artists
 resources :tats
   
 

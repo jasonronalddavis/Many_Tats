@@ -2,8 +2,8 @@
 
 
 <% if !logged_in? %>
- <%= link_to "Sign Up as User", new_user_path %><br><br>
- <%= link_to "Sign Up as Artist", new_artist_path %><br><br>
+ <%= link_to "Sign Up as User", new_admin_user_path %><br><br>
+ <%= link_to "Sign Up as Artist", new_admin_artist_path %><br><br>
 <%= link_to "Sign in", signin_path, method: 'get' %><br><br>
 
 <%else session[:user_id] %>
@@ -17,7 +17,7 @@
  
 <%else %>
  
-<h3> <%= link_to "Browse Artists", artists_path %> </h3><br>
+<h3> <%= link_to "Browse Artists", admin_artists_path %> </h3><br>
    
  <%end%> 
 
@@ -27,8 +27,9 @@
 
  <h3> Tat style: <%= @tat.style%></h3><br>
 
- <%= link_to "Edit Tat", edit_tat_path(@tat)%><br>
+ <%= link_to "Edit Tat", edit_admin_user_tat_path(@tat)%><br>
 
+ <%= link_to "Delete Tat", @tat, method: :delete, data: { confirm: "Really?" }%><br>
  
 
  <% if session[:artist_id] %>
@@ -43,6 +44,8 @@
 
  <h3> Tat color range: <%= @tat.color_range%></h3><br>
 <%end%>
+
+
 
 <%= link_to "Return home", root_path %><br>
 

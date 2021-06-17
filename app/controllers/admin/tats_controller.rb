@@ -1,4 +1,4 @@
-class TatsController < ApplicationController
+class Admin::TatsController < ApplicationController
     
   
 
@@ -44,19 +44,17 @@ def show
 end
 
  def edit
- # binding.pry
   @user = current_user
-  @artists = Artist.all
   @tat = Tat.find(params[:id])
-
+  @artists = Artist.all
 end
 
 def update
-  @artists = Artist.all
   @user = current_user
-  @tat = @user.tats.build(tat_params)
-  if @tat.save
-    redirect_to user_tat_path(@tat)
+  @tat = Tat.find(params[:id])
+  @tat.update(tat_params)
+  if @tat.update(tat_params)
+    redirect_to admin_user_tat_path(@tat)
   else
     render :edit
   end
@@ -64,10 +62,17 @@ end
 
 
   
+def delete
+  @tat = Tat.find(params[:id])
+  @tat.delete
+  redirect_to admin_application_path
+end
+
+
+
   def destroy
-    @tat = Tat.find(params[:id])
-    @tat.delete
-    redirect_to root_path
+    sessions.clear
+    redirect_to application_path
   end
 
 private 

@@ -42,7 +42,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bootstrap-sass', '3.3.7'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
-
+gem "actionview", ">= 5.0.7.2"
+gem 'sassc'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
