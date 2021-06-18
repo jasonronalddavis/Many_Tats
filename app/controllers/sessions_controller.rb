@@ -19,11 +19,17 @@ class SessionsController < ApplicationController
 end
 
 def create
+  if session[:user_id]
     @user = User.find_or_create_by(name: params[:user][:name])
-    if @user && @user.authenticate(params[:password])    
+     @user && @user.authenticate(params[:password])    
         session[:user_id] = @user.id
-        redirect_to user_path(@user)
-    else
+        redirect_to admin_user_path(@user) 
+  elsif session[:artist_id]
+    @artist = Artist.find_or_create_by(name: params[:artist][:name])
+    @artist && @artist.authenticate(params[:password])    
+       session[:artist_id] = @artist.id
+       redirect_to admin_artist_path(@artist)
+      else
         render :new
     end
   end

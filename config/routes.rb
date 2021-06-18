@@ -1,21 +1,18 @@
 Rails.application.routes.draw do
   
- 
-  
-  get 'sessions/new'
- # get 'sessions/destroy'
-  root to: 'application#welcome'
-  get '/signin', to: 'sessions#new', as: 'signin'
-  post '/signin', to: 'sessions#create', as: 'session'
-  
-  
- 
 
+  
 
-
-post 'admin/users/:user_id/tats/new', to: "tats#new"
+root to: 'application#welcome'
 
 namespace :admin do
+  get 'sessions/new'
+  # get 'sessions/destroy'
+   root to: 'application#welcome'
+   get '/signin', to: 'sessions#new', as: 'signin'
+   post '/signin', to: 'sessions#create', as: 'session'
+
+   post 'admin/users/:user_id/tats/new', to: "tats#new"
 
   devise_for :artists
   resources :artists do 

@@ -8,7 +8,7 @@ class ArtistsController < ApplicationController
         @artist = Artist.new(artist_params)
         if @artist.save
             session[:artist_id] = @artist.id
-            redirect_to artist_path(@artist)
+            redirect_to admin_artist_path(@artist)
         else
             render :new
         end
@@ -22,10 +22,11 @@ class ArtistsController < ApplicationController
     end
 
     def show
-        @user = current_user
-        @artist = Artist.find(params[:id])
+     # raise params.inspect
+        @artist = Artist.find_by(artist_params)
+       # @user = @artist.user
         @artist_tats = @artist.tats
-        @user_tats = @user.tats
+       # @user_tats = @user.tats
     end 
 
     def edit
@@ -45,7 +46,7 @@ def destroy
 end
 
 def artist_params
-    params.require(:artist).permit( :name, :password)
+    params.permit( :name, :id, :user_id)
     end
 
 end

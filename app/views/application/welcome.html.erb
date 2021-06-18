@@ -1,7 +1,7 @@
 
 <% if !logged_in? %>
- <%= link_to "Sign Up as User", new_user_path %><br><br>
- <%= link_to "Sign Up as Artist", new_artist_path %><br><br>
+ <%= link_to "Sign Up as User", new_admin_user_path %><br><br>
+ <%= link_to "Sign Up as Artist", new_admin_artist_path %><br><br>
 <%= link_to "Sign in", signin_path, method: 'get' %><br><br>
 
 <%elsif session[:user_id] %>
@@ -12,7 +12,7 @@
  <%= link_to "Users page", admin_user_path(@user), method: 'get'%><br><br>
  
  <%else %>
-<h1> Artist </h1>
+<h1> Artist: </h1>
 <h1><%= @artist.name %> </h1> <br><br><br>
  <%= link_to "Log Out", signout_path, method: 'delete'%><br><br>
 <%end%>

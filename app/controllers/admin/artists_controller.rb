@@ -17,16 +17,27 @@ class Admin::ArtistsController < ApplicationController
 
 
     def index
+        if session[:user_id]
         @user = User.find(session[:user_id])
         @artists = @user.artists
+        @artist = @uset.artist
+        elsif session[:artist_id]
+            @artist = Artist.find(session[:artist_id])
+            @user = @artist.user
+            @artists = Artist.all
+        end        
     end
 
     def show
-        @user = User.find(session[:user_id])
-        @artist = Artist.find(params[:id])
+        if session[:user_id]
+        @user = current_user
+        else
+        @artist = Artist.find(session[:artist_id])
+       # @user = @artist.users.find(params[:user_id])
         @artist_tats = @artist.tats
-        @user_tats = @user.tats
-    end 
+      # @user_tats = @user.tats
+    end
+end
 
     def edit
         @artist = Artist.find(params[:id])
