@@ -4,8 +4,8 @@ class TatsController < ApplicationController
 
 def new
 #binding.pry
-  @user = current_user
-  @tat = @user.tats.build #({user_id: @user.id})  
+@user =  User.find(session[:user_id])
+  @tat = @user.tats.build(tat_params) #({user_id: @user.id})  
   @artists = Artist.all
 
 end
@@ -14,38 +14,49 @@ end
    
   def create
   
-    @user = User.find(session[:user_id])
-    @tat = @user.tats.build(tat_params)
+  @user =  User.find(session[:user_id])
+    @tat = @user.tats.find(tat_params)
    if  @tat.save
     redirect_to user_tat_path(@tat)
   else
-        rednder :new
+        render :new
     end
   end
 
 
     def index
-      if params[:artist_id]
-        @artist = Artist.find(params[:artist_id])
-        @tats = @artist.tats.all
-        @users = @artist.users
+      @tats = Tat.all
+      if current_user.id = [:artist_id]
+        @current_user = current_user
       else
-      #  binding.pry
-      @user = User.find(session[:user_id])
-      @tats = @user.tats
-      @artists = @user.artists
+        @current_user = current_user
       end
     end
     
 def show
+  if session[:user_id]
+    @artist = Artist.find(params[:artist_id])
+    @tats = @artist.tats.all
+    @users = @artist.users
+    @user = User.find(session[:user_id])
+elsif session[:artist_id]
   @tat = Tat.find(params[:id])
-  @user = current_user
-
+  @artist = @tat.artist
+  @artist = Artist.find(session[:artist_id])
 end
+end
+
+def remove_artist 
+  @tat = Tat.find(params[:id])
+  @artist = Artist.find(session[:artist_id])
+  @user = User.find_by_id(@tat.user_id)
+  @tat.artist.delete(@tat.artist_id)
+  redirect_to admin_artist_path(@artist)
+  end
 
  def edit
  # binding.pry
-  @user = current_user
+
   @artists = Artist.all
   @tat = Tat.find(params[:id])
 
@@ -53,7 +64,6 @@ end
 
 def update
   @artists = Artist.all
-  @user = current_user
   @tat = @user.tats.build(tat_params)
   if @tat.save
     redirect_to user_tat_path(@tat)
@@ -63,16 +73,15 @@ def update
 end
 
 
-  
-  def destroy
-    @tat = Tat.find(params[:id])
-    @tat.delete
-    redirect_to root_path
-  end
+def destroy
+  @tat = Tat.find(params[:id])
+  @tat.destroy
+  redirect_to admin_root_path
+end
+
 
 private 
     def tat_params 
-     # binding.pry
       params.require(:tat).permit(:user_id, :artist_id, :style, :name, :description, :color_range)
 end
 

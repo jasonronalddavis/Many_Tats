@@ -1,17 +1,12 @@
 
 
 
-<% if !logged_in? %>
-<%= link_to "Sign Up as User", new_user_path %><br><br>
-<%= link_to "Sign Up as Artist", new_artist_path %><br><br>
-<%= link_to "Sign in", signin_path, method: 'get' %><br><br>
-
-<%elsif session[:user_id] %>
+<%if session[:artist_id] %>
 <h1> All Artists </h1>
 
 <% @artists.each do |artist| %>
 
-<%= link_to artist.name, artist_path(artist) %> <br><br>
+<%= link_to artist.name, artist_path(artist.id) %> <br><br>
 
 <%end%>
 
@@ -25,25 +20,19 @@
 
 
 
+<% elsif session[:user_id] %>
 
 
 
+<h1><%= @user.name%></h1><br>
+
+<h1> All Artists: </h1>
 
 
-
-<%else %>
-<h1> Artist </h1>
-<h1><%= @artist.name %> </h1> <br><br><br>
-<h2> Tat name: <%= @tat.name %> </h2><br><br>
-
-<h3>Tat artist: <%= @tat.artist.name%></h3><br>
-
-<h3>Tat description: <%= @tat.description%></h3><br>
-
-<h3> Tat color range: <%= @tat.color_range%></h3><br>
-<%end%>
-
-
+<% @artists.each  do |artist| %>
+<h2><%= link_to "#{artist.name}", artist_path(artist)%><h2>
+    
+<% end %><br>
+<% end %>
 <%= link_to "Return home", root_path %><br>
-
-<%= link_to "Log Out", signout_path, method: 'delete'%><br>
+<%= link_to "Log Out", signout_path, method: :delete %><br><br>

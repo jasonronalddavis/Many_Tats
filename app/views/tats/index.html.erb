@@ -1,14 +1,14 @@
 
 
 
-if 
 
-<h1><%= @user.name%>'s tats</h1>
+<h1><%= @current_user.name%></h1>
+
+
 <% @tats.each  do |tat| %>
-
-<%= link_to tat.name, user_tat_path(@user, tat)%>
-    
+<% if tat.artist == nil %>
+<%= link_to tat.name, tat_path(tat)%><br><br>
 <% end %><br>
-    
-
+<% end %><br>
+<%= link_to "Log Out", signout_path, method: :delete %><br><br>
 

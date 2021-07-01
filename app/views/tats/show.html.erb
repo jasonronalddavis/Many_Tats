@@ -6,20 +6,19 @@
  <%= link_to "Sign Up as Artist", new_artist_path %><br><br>
 <%= link_to "Sign in", signin_path, method: 'get' %><br><br>
 
-<%else session[:user_id] %>
+<%elsif session[:user_id] %>
 <h1> User: <%= @user.name%> </h1><br><br>
  
  <h2> Tat name: <%= @tat.name %> </h2><br>
  
- <%end%> 
+ 
  <% if @tat.artist_id != nil %>
  <h3>Tat artist: <%= @tat.artist.name%></h3><br>
  
 <%else %>
- 
 <h3> <%= link_to "Browse Artists", artists_path %> </h3><br>
-   
- <%end%> 
+<%end%>
+
 
  <h3>Tat description: <%= @tat.description%></h3><br>
 
@@ -27,23 +26,28 @@
 
  <h3> Tat style: <%= @tat.style%></h3><br>
 
+
  <%= link_to "Edit Tat", edit_tat_path(@tat)%><br>
 
  
-
- <% if session[:artist_id] %>
+ <%else%>
 
 <h1> Artist </h1>
 <h1><%= @artist.name %> </h1> <br><br><br>
-<h2> Tat name: <%= @tat.name %> </h2><br><br>
 
- <h3>Tat artist: <%= @tat.artist.name%></h3><br>
+
+
+<h3> Tat User: <%= @tat.user.name%> </h2><br><br>
+
+<h3> Tat name: <%= @tat.name %> </h2><br><br>
 
  <h3>Tat description: <%= @tat.description%></h3><br>
 
- <h3> Tat color range: <%= @tat.color_range%></h3><br>
-<%end%>
+ <h3> Tat color range: <%= @tat.color_range.to_s%></h3><br>
+<%end%><br>
 
-<%= link_to "Return home", root_path %><br>
 
-<%= link_to "Log Out", signout_path, method: 'delete'%><br>
+
+<%= link_to "Return home", admin_root_path %><br>
+
+<%= link_to "Log Out", signout_path, method: :delete %><br><br>

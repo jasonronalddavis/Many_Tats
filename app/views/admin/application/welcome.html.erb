@@ -1,28 +1,33 @@
 
-<% if !logged_in? %>
+
+<%if session[:user_id] %>
+<h1> User  </h1>
+ <h1><%= @user.name%> </h1> <br><br><br>
+ <%= link_to "Create Tat", new_admin_user_tat_path(@user.id) %><br><br>
+ 
+ <%= link_to "Log Out", signout_path, method: :delete %><br><br>
+ <%= link_to "Users page", admin_user_path([:admin],@user.id), method: 'get'%><br><br>
+ <% Artist.all.each do |artist| %>
+ <%= link_to artist.name, artist_path(artist.id)%>
+<%end%>
+ <% elsif session[:artist_id] %>
+<h1> Artist: </h1>
+<h1><%= @artist.name %> </h1> <br><br><br>
+<%= link_to "Artist page", admin_artist_path([:admin],@artist.id), method: 'get'%><br><br>
+
+<h2> <%= link_to "Available work", tats_path %> </h2><br>
+
+
+
+
+
+
+
+<%= link_to "Log Out", signout_path, method: :delete %><br><br>
+
+<% else %>
  <%= link_to "Sign Up as User", new_admin_user_path %><br><br>
  <%= link_to "Sign Up as Artist", new_admin_artist_path %><br><br>
 <%= link_to "Sign in", signin_path, method: 'get' %><br><br>
 
-<%elsif session[:user_id] %>
-<h1> User  </h1>
- <h1><%= @user.name%> </h1> <br><br><br>
- <%= link_to "Create Tat", new_admin_user_tat_path(@user.id) %><br><br>
- <%= link_to "Log Out", signout_path, method: 'delete'%><br><br>
- <%= link_to "Users page", admin_user_path(@user), method: 'get'%><br><br>
- 
- <%else %>
-<h1> Artist: </h1>
-<h1><%= @artist.name %> </h1> <br><br><br>
-
-<h2> All Artists: </h2>
-
-<% Artist.all.each do |artist| %>
-    <%= link_to artist.name, artist_path(artist.id)%>
-    <%end%>
-
-<% Tat.all.each  do |tat| %>
-    <%= link_to tat.name, tat_path(tat)%>    
-    <% end %><br><br>
- <%= link_to "Log Out", signout_path, method: 'delete'%><br><br>
 <%end%>

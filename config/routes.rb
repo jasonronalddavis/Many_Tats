@@ -1,37 +1,62 @@
 Rails.application.routes.draw do
   
-
   
 
-root to: 'application#welcome'
 
-namespace :admin do
-  get 'sessions/new'
-  # get 'sessions/destroy'
-   root to: 'application#welcome'
-   get '/signin', to: 'sessions#new', as: 'signin'
-   post '/signin', to: 'sessions#create', as: 'session'
+ 
+    
 
-   post 'admin/users/:user_id/tats/new', to: "tats#new"
+  root to: 'application#welcome'
 
-  devise_for :artists
+
+  resources :sessions
+  get '/signin', to: 'sessions#new'
+  post '/signin', to: 'sessions#create'
+  get '/signout', to: 'sessions#destroy'
+  delete '/signout', to: 'sessions#destroy'
+
+
+
+  namespace :admin do
+
+  get '/admin/sessions/:id/signout', to: 'sessions#destroy'
+  resources :sessions do
+  get '/signin', to: 'sessions#new'
+  post '/signin', to: 'sessions#create', as: 'session'
+ end
+
+
+  root to: 'application#welcome'
+  
+
+  resources :tats do
+  get '/tats/:id/remove_artist', to: 'tats#remove_artist'
+    post '/tats/:id/remove_artist', to: 'tats#remove_artist' 
+end
+
+
+
   resources :artists do 
+    resources :users
     resources :tats
-  end
+    get '/tats/:id/remove_artist', to: 'tats#remove_artist'
+    post '/tats/:id/remove_artist', to: 'tats#remove_artist'
+end
+
 
   resources :users do
     devise_for :artists
     resources :artists, only: [:show, :index, :destroy]
-    devise_for :tats
-    resources :tats, only: [:new, :create, :index, :show, :destroy, :edit, :patch, :update]
-    post 'admin/users/:user_id/tats/new', to: "tats#new"
+   resources :tats
 end
 end
+
+resources :tats
+
 
 resources :artists
-resources :tats
-  
+get 'artists/add_artist'
+post 'artists/add_artist'
 
-delete '/signout', to: 'sessions#destroy'
 end
 

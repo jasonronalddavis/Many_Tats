@@ -1,23 +1,16 @@
 
-
-
-<% if !logged_in? %>
- <%= link_to "Sign Up as User", new_admin_user_path %><br><br>
- <%= link_to "Sign Up as Artist", new_admin_artist_path %><br><br>
-<%= link_to "Sign in", signin_path, method: 'get' %><br><br>
-
-<%else session[:user_id] %>
+<% if session[:user_id] %>
 <h1> User: <%= @user.name%> </h1><br><br>
  
  <h2> Tat name: <%= @tat.name %> </h2><br>
  
- <%end%> 
- <% if @tat.artist_id != nil %>
- <h3>Tat artist: <%= @tat.artist.name%></h3><br>
  
+ <% if @tat.artist != nil %>
+ <h3>Tat artist: <%= @tat.artist.name%></h3><br>
+ <h3><%= link_to @tat_artist.name, artist_path(@tat_artist) %></h3> <br>
 <%else %>
  
-<h3> <%= link_to "Browse Artists", admin_artists_path %> </h3><br>
+<h3> <%= link_to "Browse Artists", artists_path %> </h3><br>
    
  <%end%> 
 
@@ -27,26 +20,38 @@
 
  <h3> Tat style: <%= @tat.style%></h3><br>
 
+ <h3> Tat style: <%= @tat.artist%>/h3><br>
+
  <%= link_to "Edit Tat", edit_admin_user_tat_path(@tat)%><br>
 
- <%= link_to "Delete Tat", @tat, method: :delete, data: { confirm: "Really?" }%><br>
+ <%= button_to 'Delete Tat', @tat, method: :delete, data: { confirm: 'Are You sure?' }%><br>
  
 
- <% if session[:artist_id] %>
+ <% elsif session[:artist_id] %>
 
 <h1> Artist </h1>
 <h1><%= @artist.name %> </h1> <br><br><br>
+
+
+
 <h2> Tat name: <%= @tat.name %> </h2><br><br>
 
  <h3>Tat artist: <%= @tat.artist.name%></h3><br>
 
  <h3>Tat description: <%= @tat.description%></h3><br>
 
- <h3> Tat color range: <%= @tat.color_range%></h3><br>
+ <h3> Tat color range: <%= @tat.color_range%></h3><br><br>
+
+
+
+ <%= link_to "decine request", controller: "tats", action: "remove_artist", id: @tat %><br>
+
 <%end%>
 
 
 
-<%= link_to "Return home", root_path %><br>
 
-<%= link_to "Log Out", signout_path, method: 'delete'%><br>
+<%= link_to "Return home", admin_root_path %><br>
+
+
+<%= link_to "Log Out", signout_path, method: :delete %><br><br>
