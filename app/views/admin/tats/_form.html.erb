@@ -1,10 +1,12 @@
 
 
+<%=form_for [:admin,@user,@tat] do |f| %>
 
-<%= form_for [:admin,@user,@tat] do |f| %>
-    <%= f.hidden_field :user_id %>
- 
- <tat_name>
+    <%= f.hidden_field :tat, value: @tat.id %>
+     
+    <%= f.hidden_field :user_id, value: @user.id %>
+
+
     <h1> Name Your Tat </h1>
  
      <%= f.label :name, "name" %>
@@ -37,7 +39,7 @@
      
      <%= f.radio_button :color_range, '1', :checked => true %> 1 color <br>
      <%= f.radio_button :color_range, '2', :checked => true %> 2 colors <br>
-     <%= f.radio_button :color_range, 'self >= 3', :checked => true %> 3 + colors <br>
+     <%= f.radio_button :color_range, '3 or more colors', :checked => true %> 3 + colors <br>
      </color><br><br>
    
      <tat_style>

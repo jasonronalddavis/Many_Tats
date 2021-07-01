@@ -10,13 +10,14 @@ helper_method :current_user, :logged_in?, :authenticate_user
 
   
   def welcome
-    if logged_in? && session[:user_id]
+    if session[:user_id]
     @user = User.find(session[:user_id])
     redirect_to admin_root_path
     artists = Artist.all
-    else
+    elsif session[:artist_id]
     @artist = Artist.find(session[:artist_id])
     @artists = Artist.all
+    else
     redirect_to admin_root_path
   end
   end

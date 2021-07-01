@@ -1,18 +1,19 @@
 
-<% if !logged_in? %>
- <%= link_to "Sign Up as User", new_admin_user_path %><br><br>
- <%= link_to "Sign Up as Artist", new_admin_artist_path %><br><br>
-<%= link_to "Sign in", signin_path, method: 'get' %><br><br>
 
-<%elsif session[:user_id] %>
+<%if session[:user_id]  %>
 <h1> User  </h1>
  <h1><%= @user.name%> </h1> <br><br><br>
  <%= link_to "Create Tat", new_admin_user_tat_path(@user.id) %><br><br>
- <%= link_to "Log Out", signout_path, method: 'delete'%><br><br>
+ <%= link_to "Log Out", signout_path, method: :delete %><br><br>
  <%= link_to "Users page", admin_user_path(@user), method: 'get'%><br><br>
  
- <%else %>
+ <%elsif session[:user_id] %>
 <h1> Artist: </h1>
 <h1><%= @artist.name %> </h1> <br><br><br>
- <%= link_to "Log Out", signout_path, method: 'delete'%><br><br>
+%= link_to "Log Out", signout_path, method: :delete %><br><br>
+<%else%>
+
+ <%= link_to "Sign Up as User", new_admin_user_path %><br><br>
+ <%= link_to "Sign Up as Artist", new_admin_artist_path %><br><br>
+<%= link_to "Sign in", signin_path%><br><br>
 <%end%>

@@ -1,16 +1,13 @@
 class UsersController < ApplicationController
-
-    protect_from_forgery with: :exception
     before_action :authenticate_user, only: [:show]
 
     def new
      #binding.pry
-     @user = User.new
+     @user = User.new(user_params)
     end
 
     def create
      
-
         @user = User.new(user_params)
         if @user.save
             session[:user_id] = @user.id
@@ -21,7 +18,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find_by(id: params[:id])
+        current_user
         @tats = @user.tats
         @artists = @user.artists
         # binding.pry
