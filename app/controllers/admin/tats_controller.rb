@@ -47,8 +47,18 @@ class Admin::TatsController < ApplicationController
     def show
       if session[:user_id]
         @user = User.find(session[:user_id])
+<<<<<<< HEAD
         @tat = Tat.find(params[:id]) 
        @tat_artist = @tat.artist
+=======
+        @tat = Tat.find(params[:id])
+      if @tat.artist != nil
+        @artist = @tat.artist
+        @user = @tat.user
+      else 
+        @artist = Artist.find_by_id(params[:artist_id])
+      end
+>>>>>>> 6ca54add377f1eba06c6eff04c3d3dd939ac4d60
     end
      if session[:artist_id]
      @artist = Artist.find(session[:artist_id])
@@ -58,11 +68,18 @@ end
 
     
     def remove_artist 
+<<<<<<< HEAD
    # binding.pry
     @artist = Artist.find(session[:artist_id])
     @tat = Tat.find(params[:id])
    @tat.artist = nil 
    @tat.save
+=======
+    #  binding.pry
+    @artist = Artist.find(session[:artist_id])
+    @tat = Tat.find(params[:id])
+    @tat.delete(artist_id)
+>>>>>>> 6ca54add377f1eba06c6eff04c3d3dd939ac4d60
     redirect_to admin_artist_path(@artist)
     end
     

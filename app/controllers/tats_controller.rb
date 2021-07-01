@@ -47,7 +47,10 @@ end
 end
 
 def remove_artist 
+<<<<<<< HEAD
   binding.pry
+=======
+>>>>>>> 6ca54add377f1eba06c6eff04c3d3dd939ac4d60
   @tat = Tat.find(params[:id])
   @artist = Artist.find(session[:artist_id])
   @user = User.find_by_id(@tat.user_id)

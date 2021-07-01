@@ -6,8 +6,13 @@
  
  
  <% if @tat.artist != nil %>
+<<<<<<< HEAD
 
  <h3> Tat artist: <%= link_to @tat_artist.name, artist_path(@tat_artist) %></h3> <br>
+=======
+ <h3>Tat artist: <%= @tat.artist.name%></h3><br>
+ <h3><%= link_to @tat_artist.name, artist_path(@tat_artist) %></h3> <br>
+>>>>>>> 6ca54add377f1eba06c6eff04c3d3dd939ac4d60
 <%else %>
  
 <h3> <%= link_to "Browse Artists", artists_path %> </h3><br>
@@ -19,6 +24,8 @@
  <h3> Tat color range: <%= @tat.color_range%></h3><br>
 
  <h3> Tat style: <%= @tat.style%></h3><br>
+
+ <h3> Tat style: <%= @tat.artist%>/h3><br>
 
  <%= link_to "Edit Tat", edit_admin_user_tat_path(@tat)%><br>
 
