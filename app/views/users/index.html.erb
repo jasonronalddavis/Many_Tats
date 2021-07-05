@@ -1,1 +1,27 @@
-<h1> index </h1>
+
+
+
+<%if session[:artist_id] %>
+<h1> All Users </h1>
+
+<% @users.each do |user| %>
+
+<%= link_to user.name, user_path(user) %> <br><br>
+
+<%end%>
+
+
+<% elsif session[:user_id] %>
+
+
+<h1><%= @user.name%></h1><br>
+
+<h1> All Artists: </h1>
+
+<% @users.each  do |user| %>
+<h2><%= link_to "user.name", user_path(user)%><h2>
+    
+<% end %><br>
+<% end %>
+<%= link_to "Return home", admin_root_path %><br>
+<%= link_to "Log Out", signout_path, method: :delete %><br><br>

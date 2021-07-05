@@ -1,14 +1,22 @@
 
+if session[:artist_id]
 
 
+<h1><%= @artist.name%></h1>
 
-<h1><%= @user.name%>'s tats</h1>
+
 <% @tats.each  do |tat| %>
-   
-<h2><%= link_to "#{tat.name}", admin_user_tat_path(@user,tat.id)%><h2>
+<%= link_to tat.name, admin_artist_tat_path(@artist,tat)%><br><br>
+<% end %>
+<% end %>
 
+elsif session[:user_id]
 
-<% end %><br>
-    
+    h1><%= @user.name%></h1>
 
-<%= link_to "Return home", root_path %>
+    <% @tats.each  do |tat| %>
+        <%= link_to tat.name, admin_user_tat_path(@user,tat)%><br><br>
+        <% end %>
+        <% end %> 
+
+<%= link_to "Log Out", signout_path, method: :delete %><br><br>

@@ -13,9 +13,11 @@
 
 <h1><%= @artist.name %> </h1> <br>
 
-<h2> <%= @artist.name%> 's special skills: </h2><br><br><br><br>
+<h2> About <%= @user_artist.name%>:  </h2><br><br>
 
-<%= button_to "Add Artist", {action: :add_artist, id: @artist.id }, method: :post %>
+<h2> <%= @user_artist.bio%> </h2><br><br><br><br>
+
+<%= button_to "Add Artist", {action: :add_artist, id: @user_artist.id }, method: :post %>
 
 <%= link_to "Log Out", signout_path, method: :delete %><br><br>
 <br>

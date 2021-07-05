@@ -6,6 +6,9 @@ Rails.application.routes.draw do
  
     
 
+  
+
+  get 'users/add_user'
   root to: 'application#welcome'
 
 
@@ -52,6 +55,11 @@ end
 end
 
 resources :tats
+
+resources :users
+get 'users/add_user'
+post 'users/add_user'
+
 
 
 resources :artists

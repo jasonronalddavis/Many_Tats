@@ -2,39 +2,33 @@
 <% if session[:user_id] %>
 <h1> User: <%= @user.name%> </h1><br><br>
  
- <h2> Tat name: <%= @tat.name %> </h2><br>
+ <h2> Tat Name: <%= @tat.name %> </h2><br>
  
  
  <% if @tat.artist != nil %>
-<<<<<<< HEAD
-
  <h3> Tat artist: <%= link_to @tat_artist.name, artist_path(@tat_artist) %></h3> <br>
-=======
- <h3>Tat artist: <%= @tat.artist.name%></h3><br>
- <h3><%= link_to @tat_artist.name, artist_path(@tat_artist) %></h3> <br>
->>>>>>> 6ca54add377f1eba06c6eff04c3d3dd939ac4d60
 <%else %>
- 
-<h3> <%= link_to "Browse Artists", artists_path %> </h3><br>
-   
+<h3> <%= link_to "Browse Artists", artists_path %> </h3><br> 
  <%end%> 
 
- <h3>Tat description: <%= @tat.description%></h3><br>
+ <h3>Tat Description: <%= @tat.description%></h3><br>
 
- <h3> Tat color range: <%= @tat.color_range%></h3><br>
+ <h3> Tat Color Range: <%= @tat.color_range%></h3><br>
 
- <h3> Tat style: <%= @tat.style%></h3><br>
+ <h3> Tat Appointment Date: <%= @tat.appointment_date%></h3><br>
 
- <h3> Tat style: <%= @tat.artist%>/h3><br>
+ <h3> Tat Style: <%= @tat.style%></h3><br>
 
- <%= link_to "Edit Tat", edit_admin_user_tat_path(@tat)%><br>
+
 
  <%= button_to 'Delete Tat', @tat, method: :delete, data: { confirm: 'Are You sure?' }%><br>
  
+ <%= link_to "Edit Tat", edit_admin_user_tat_path(@tat)%><br>
+
 
  <% elsif session[:artist_id] %>
 
-<h1> Artist </h1>
+<h1> Artist: </h1>
 <h1><%= @artist.name %> </h1> <br><br><br>
 
 
@@ -47,7 +41,7 @@
 
  <h3> Tat color range: <%= @tat.color_range%></h3><br><br>
 
-
+ <%= radio_button :status, 'Approve Appointment', :checked => true %> Approve Appointment <br><br>
 
  <%= link_to "decine request", controller: "tats", action: "remove_artist", id: @tat %><br>
 

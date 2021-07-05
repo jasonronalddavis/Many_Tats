@@ -26,13 +26,13 @@ end
 
     def index
       @tats = Tat.all
-      if current_user.id = [:artist_id]
-        @current_user = current_user
-      else
-        @current_user = current_user
+      if session[:artist_id]
+        @artist = Artist.find(session[:artist_id])
+      elsif session[:user_id]
+        @user = User.find(session[:user_id])
       end
     end
-    
+ 
 def show
   if session[:user_id]
     @artist = Artist.find(params[:artist_id])
@@ -41,16 +41,12 @@ def show
     @user = User.find(session[:user_id])
 elsif session[:artist_id]
   @tat = Tat.find(params[:id])
-  @artist = @tat.artist
   @artist = Artist.find(session[:artist_id])
 end
 end
 
 def remove_artist 
-<<<<<<< HEAD
-  binding.pry
-=======
->>>>>>> 6ca54add377f1eba06c6eff04c3d3dd939ac4d60
+
   @tat = Tat.find(params[:id])
   @artist = Artist.find(session[:artist_id])
   @user = User.find_by_id(@tat.user_id)

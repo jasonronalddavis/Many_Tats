@@ -5,15 +5,24 @@
 
 
 
+<h1> Users Tats </h1>
+<% @user.tats.each do |tat|%>
+    <h2><%= link_to tat.name, tat_path(tat)%><br>
+<%end%>
 
-<%= link_to "Users tats",user_tats_path(@tats) %><br><br>
 
 
-<%= link_to "Users artists",user_artists_path(@artists) %><br><br>
+<h1> Users Artists </h1>
 
-<%= link_to "Log Out", signout_path, method: :delete %><br><br>
+<% @user.artists.each do |artist|%></h2>
+    <h2> <%= link_to artist.name, artist_path(artist) %></h2>
+    <%end%><br><br>
+
+ <%= button_to "Add User", {action: :add_user, id: @user.id }, method: :post %>
+
+<%= link_to "Log Out", signout_path, method: :delete %>
 <br>
 
-<%= link_to "Return home", root_path %>
+<%= link_to "Return home", admin_root_path %>
 
 <br>

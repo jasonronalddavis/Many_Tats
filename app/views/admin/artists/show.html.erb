@@ -1,15 +1,36 @@
 
 
 
-<h2> Artist Name: <%= @artist.name %></h2><br><br>
-<h2>  Artist's Tats: </h2>
+<h2> Artist Name: <%= @artist.name %></h1><br><br>
+
+
+
+<h2> About Artist:</h2><br>
+
+<%= @artist.bio %></h2><br><br>
+
+
+
+<h2>  Tat requests: </h2>
 <% @artist_tats.each do |tat| %>
 <h2> <%= link_to(tat.name, admin_artist_tat_path(@artist,tat)) %></h2><br>
-<%end%>
+<%end%><br>
 
-<%= link_to "Log Out", signout_path, method: :delete %><br><br>
-<br>
 
-<%= link_to "Return home", admin_root_path %>
+<h2> Your Artists </h2>
 
-<br>
+ <% @artist.artists.each do |artist| %> 
+    <h3> <%= link_to  artist.name, artist_path(artist) %></h3>
+    <%end%><br>
+
+    <h2> Your Users </h2>
+
+    <% @artist.users.each do |user| %> 
+       <h3> <%= link_to  user.name, user_path(user) %></h3>
+       <%end%><br>
+
+<%= link_to "Log Out", signout_path, method: :delete %><br>
+
+<%= link_to "Return home", admin_root_path %><br>
+
+<%= link_to "Edit Artist", edit_admin_artist_path(@artist)%><br>

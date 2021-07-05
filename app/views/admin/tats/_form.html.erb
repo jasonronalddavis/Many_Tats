@@ -14,7 +14,13 @@
      </h1><br>
  <tat_name>
  
+
+
+ <h1> Schedule your Tat Date </h1>
  
+ <h1> <%= f.datetime_select :appointment_date%> </h1><br>
+
+
  <tat_artist>
      <h1> Choose an Artist </h1>
  
@@ -36,7 +42,6 @@
      
      <color>
      <h1> Tat Size </h1>
-     
      <%= f.radio_button :color_range, '1', :checked => true %> 1 color <br>
      <%= f.radio_button :color_range, '2', :checked => true %> 2 colors <br>
      <%= f.radio_button :color_range, '3 or more colors', :checked => true %> 3 + colors <br>

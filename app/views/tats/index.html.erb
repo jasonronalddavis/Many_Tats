@@ -1,14 +1,21 @@
+<% if session[:artist_id] %>
 
+<h1><%= @artist.name%></h1>
 
-
-
-<h1><%= @current_user.name%></h1>
-
-
-<% @tats.each  do |tat| %>
-<% if tat.artist == nil %>
+<% @tats.each do |tat| %>
+<%  if !tat.artist_id %>
 <%= link_to tat.name, tat_path(tat)%><br><br>
-<% end %><br>
-<% end %><br>
-<%= link_to "Log Out", signout_path, method: :delete %><br><br>
+<% end %>
+<% end %>
 
+
+
+
+<% elsif session[:user_id] %>
+    <% @tats.each  do |tat| %>
+        <%= link_to tat.name, admin_user_tat_path(@user,tat)%><br><br>
+        <% end %>
+        <% end %> 
+ 
+
+<%= link_to "Log Out", signout_path, method: :delete %><br><br>

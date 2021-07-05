@@ -51,7 +51,7 @@ end
     def update
         @artist = Artist.find(params[:id])
         @artist.update(artist_params)
-        redirect_to artist_path(@artist)
+        redirect_to admin_artist_path(@artist)
     end
 
 
@@ -63,7 +63,7 @@ end
       end
 
 def artist_params
-    params.require(:artist).permit( :id, :name, :password)
+    params.require(:artist).permit( :id, :name, :password, :bio)
     end
 
 end

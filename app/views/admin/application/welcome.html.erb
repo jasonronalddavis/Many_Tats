@@ -14,6 +14,9 @@
 <h1> Artist: </h1>
 <h1><%= @artist.name %> </h1> <br><br><br>
 <%= link_to "Artist page", admin_artist_path([:admin],@artist.id), method: 'get'%><br><br>
+<%= link_to "All users", users_path%><br><br>
+
+
 
 <h2> <%= link_to "Available work", tats_path %> </h2><br>
 

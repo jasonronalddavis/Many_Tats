@@ -17,23 +17,40 @@ class UsersController < ApplicationController
         end
     end
 
-    def show
-        current_user
-        @tats = @user.tats
-        @artists = @user.artists
-        # binding.pry
-        # if current_user.admin == false
-        #     if current_user != @user
-        #         redirect_to root_path
-        #     end
-        # end
+    def index
+        @users = User.all
+        @artists = User.all
+        if session[:artist_id]
+            @artist = Artist.find(session[:artist_id])
+        elsif session[:user_id]
+        @user = User.find(session[:user_id])
+          end
     end
 
-    # def destroy
-    #     @user = User.find(params[:id])
-    #     @user.destroy
-    #     redirect_to root_path
-    # end
+    def show
+  if session[:user_id]
+    @user = User.find(session[:user_id])
+    elsif session[:artist_id]
+    @artist = Artist.find(session[:artist_id])
+    @user = User.find(params[:id])
+end
+end
+
+
+
+def add_user
+    if session[:user_id]
+    @user = User.find(session[:user_id])
+    @artist = Artist.find(params[:id])
+    @user.artists << @artist 
+    redirect_to admin_user_path(@user)
+    elsif session[:artist_id]
+        @artist = Artist.find(session[:artist_id])
+        @user = User.find(params[:id])
+        @artist.users << @user
+    redirect_to admin_artist_path(@artist)
+end
+end
 
     private
 

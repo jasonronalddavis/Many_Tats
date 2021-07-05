@@ -42,7 +42,7 @@ class ArtistsController < ApplicationController
     @artist = Artist.find(session[:artist_id])
     @user = User.find(params[:id])
    # @user = @artist.users.find(params[:user_id])
-    @artist_tats = @artist.tats
+   @user_artist = Artist.find(params[:id])
   # @user_tats = @user.tats
 end
 end 
@@ -50,10 +50,16 @@ end
 
 
 def add_artist
+    if session[:user_id]
     @user = User.find(session[:user_id])
     @artist = Artist.find(params[:id])
     @user.artists << @artist 
+    elsif session[:artist_id]
+        @artist = Artist.find(session[:artist_id])
+        @user_artist = Artist.find(params[:id])
+        @artist.artists << @artist 
     redirect_to admin_artists_path
+end
 end
 
    
