@@ -8,7 +8,8 @@ class Admin::ArtistsController < Admin::ApplicationController
  
     @artist = Artist.new(artist_params)
     @artist && @artist.authenticate(artist_params)   
-        if @artist.save
+        if @artist.valid?
+            @artist.save
             session[:artist_id] = @artist.id
             redirect_to admin_artist_path(@artist)
         else
