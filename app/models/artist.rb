@@ -5,10 +5,6 @@ class Artist < ApplicationRecord
   has_many :users
   has_many :artists
 
- # validates :artist_, uniqueness: true
-
-
-
-
+  validates :password, presence: { message: "must be given please" }, length: { in: 6..20 }
 
 end

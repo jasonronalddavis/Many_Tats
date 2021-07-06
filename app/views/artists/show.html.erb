@@ -6,7 +6,7 @@
 
 
 
-   
+  <% if session[:artist_id] %>
 
 
 
@@ -18,6 +18,27 @@
 <h2> <%= @user_artist.bio%> </h2><br><br><br><br>
 
 <%= button_to "Add Artist", {action: :add_artist, id: @user_artist.id }, method: :post %>
+
+
+
+<% elsif session[:user_id] %>
+
+
+
+
+<h1><%= @artist.name %> </h1> <br>
+
+<h2> About <%= @artist.name%>:  </h2><br><br>
+
+<h2> <%= @artist.bio%> </h2><br><br><br><br>
+
+<%= button_to "Add Artist", {action: :add_artist, id: @artist.id }, method: :post %>
+
+
+
+<%end%>
+
+
 
 <%= link_to "Log Out", signout_path, method: :delete %><br><br>
 <br>

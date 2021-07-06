@@ -2,17 +2,27 @@
 
 
 
+<h2> <%= @user.name %> </h2><br><br>
+
 
 <%if session[:user_id] %>
 
+
+
+
+
+
+
 <h1> Your Artists </h1><br><br>
 <% @user.artists.each do |artist| %>
-<%= link_to artist.name, artist_path(artist) %>    
-
-
+<%= link_to artist.name, artist_path(artist) %>  
+<%end%>
+<% if @user.artists = [] %>
+<h1> You have none! </h1>  
 <%end%>
 
-<h1> All Artists. Click to view page. </h1>
+
+
 
 
 

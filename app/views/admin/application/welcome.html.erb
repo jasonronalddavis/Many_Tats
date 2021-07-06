@@ -3,8 +3,8 @@
 <%if session[:user_id] %>
 <h1> User  </h1>
  <h1><%= @user.name%> </h1> <br><br><br>
- <%= link_to "Create Tat", new_admin_user_tat_path(@user.id) %><br><br>
- 
+ <%= link_to "All Artists",artists_path %><br><br>
+
  <%= link_to "Log Out", signout_path, method: :delete %><br><br>
  <%= link_to "Users page", admin_user_path([:admin],@user.id), method: 'get'%><br><br>
  <% Artist.all.each do |artist| %>

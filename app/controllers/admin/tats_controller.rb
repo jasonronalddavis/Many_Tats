@@ -13,7 +13,8 @@ class Admin::TatsController < ApplicationController
         @user = User.find(session[:user_id])
         @tat = @user.tats.build(tat_params)
         @artist = @tat.artist
-       if  @tat.save
+       if  @tat.valid?
+        @tat.save
         add_artist
         @user.artists << @artist 
         redirect_to admin_user_tat_path(@user,@tat)
@@ -21,6 +22,8 @@ class Admin::TatsController < ApplicationController
             render :new
         end
       end
+
+      
     
       def add_artist
         @user = User.find(session[:user_id])
@@ -32,12 +35,11 @@ class Admin::TatsController < ApplicationController
     
     
         def index
-          if params[:artist_id]
+          if session[:artist_id]
             @artist = Artist.find(session[:artist_id])
-            @tats = @artist.tats.all
+            @tats = @artist.tats
             @users = @artist.users
-          else
-          #  binding.pry
+          elsif session[:user_id]
           @user = User.find(session[:user_id])
           @tats = @user.tats
           @artists = @user.artists
