@@ -41,7 +41,11 @@
 
  <h3> Tat color range: <%= @tat.color_range%></h3><br><br>
 
- <%= radio_button :status, 'Approve Appointment', :checked => true %> Approve Appointment <br><br>
+ <%= check_box("tats", "approve_request", { class: 'tats' }, true, false)%> Approve Appointment <br><br>
+
+
+
+
 
  <%= link_to "decine request", controller: "tats", action: "remove_artist", id: @tat %><br>
 
