@@ -9,14 +9,15 @@ class Admin::TatsController < ApplicationController
     
        
       def create
-    
+        @artists = Artist.all
         @user = User.find(session[:user_id])
         @tat = @user.tats.build(tat_params)
         @artist = @tat.artist
        if  @tat.valid?
         @tat.save
+        if @tat.artist != nil
         add_artist
-        @user.artists << @artist 
+      end
         redirect_to admin_user_tat_path(@user,@tat)
       else
             render :new
@@ -84,12 +85,15 @@ end
   end
     
     def update
-      
+      @artists = Artist.all
+      @user = User.find(session[:user_id])
       @tat = Tat.find(params[:id])
       @tat.update(tat_params)
-      if @tat.update(tat_params)
+      if @tat.valid?
+        @tat.update(tat_params)
         redirect_to admin_user_tat_path(@tat)
       else
+        flash[:too_short]
         render :edit
       end
     end
