@@ -33,4 +33,7 @@
  <%= link_to "Sign Up as Artist", new_admin_artist_path %><br><br>
 <%= link_to "Sign in", signin_path, method: 'get' %><br><br>
 
+<h3> Or Login Through Google </h3><br><br>
+
+<%= button_to "Google", '/auth/google_oauth2' %>
 <%end%>

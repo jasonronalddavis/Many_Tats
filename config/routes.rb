@@ -8,8 +8,10 @@ Rails.application.routes.draw do
 
   
 
-  get 'users/add_user'
+
+
   root to: 'application#welcome'
+
 
 
   resources :sessions
@@ -18,25 +20,26 @@ Rails.application.routes.draw do
   get '/signout', to: 'sessions#destroy'
   delete '/signout', to: 'sessions#destroy'
 
-
+#namespace admin 
 
   namespace :admin do
+
+  root to: 'application#welcome'
+
+ 
 
   get '/admin/sessions/:id/signout', to: 'sessions#destroy'
   resources :sessions do
   get '/signin', to: 'sessions#new'
   post '/signin', to: 'sessions#create', as: 'session'
- end
-
-
-  root to: 'application#welcome'
-  
-
-  resources :tats do
-  get '/tats/:id/remove_artist', to: 'tats#remove_artist'
-    post '/tats/:id/remove_artist', to: 'tats#remove_artist' 
 end
 
+
+  resources :tats do
+  get 'tats/:id/approve_tat', to: 'tats#approve_tat'
+  get '/tats/:id/remove_artist', to: 'tats#remove_artist'
+  post '/tats/:id/remove_artist', to: 'tats#remove_artist' 
+end
 
 
   resources :artists do 
@@ -53,6 +56,11 @@ end
    resources :tats
 end
 end
+
+#w/o admin
+
+get '/auth/:provider/callback', to: "sessions#omniauth"
+
 
 resources :tats
 

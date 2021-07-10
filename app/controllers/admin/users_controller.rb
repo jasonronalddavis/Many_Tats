@@ -1,10 +1,10 @@
 class Admin::UsersController < Admin::ApplicationController
-
-
+    
     def new
      #binding.pry
      @user = User.new
     end
+
 
     def create
 
@@ -15,7 +15,7 @@ class Admin::UsersController < Admin::ApplicationController
             session[:user_id] = @user.id
             redirect_to admin_user_path(@user)
         else
-            redirect_to admin_root_path
+            render :new
         end
     end
 

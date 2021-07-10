@@ -1,4 +1,6 @@
 class Admin::TatsController < ApplicationController
+  helper_method :approve_tat
+
   def new
     # raise params.inspect
      @user = User.find(session[:user_id])
@@ -48,6 +50,7 @@ class Admin::TatsController < ApplicationController
         end
         
     def show
+     # binding.pry
       if session[:user_id]
         @user = User.find(session[:user_id])
         @tat = Tat.find(params[:id]) 
@@ -93,7 +96,6 @@ end
         @tat.update(tat_params)
         redirect_to admin_user_tat_path(@tat)
       else
-        flash[:too_short]
         render :edit
       end
     end
@@ -105,12 +107,17 @@ end
       @tat.destroy
       redirect_to admin_root_path
     end
+
+  def approve_tat
+    @tat = Tat.find(params[:id])
+    @tat.status.update
+  end
     
     
     
       def tat_params 
        #raise params.inspect
-      params.require(:tat).permit(:id, :appointment_date, :user_id, :artist_id, :style, :name, :description, :color_range)
+      params.require(:tat).permit(:id, :appointment_date, :stat, :user_id, :artist_id, :style, :name, :description, :color_range)
     end
-  3  
+
     end

@@ -1,4 +1,17 @@
 <%= form_for [:admin,@user] do |f| %>
+
+    <% if @user.errors.any? %>
+    <h1> ERRORS: </h1>
+    
+    <% @user.errors.full_messages.each do |message| %>
+    <ul>
+    <li><%= message %></li>
+    </ul>
+    <%end%>
+    <%end%>
+
+
+
     <%= f.hidden_field :id %>
     <%= f.label :name %><br>
     <%= f.text_field :name, class: "NAME" %>

@@ -41,7 +41,19 @@
 
  <h3> Tat color range: <%= @tat.color_range%></h3><br><br>
 
- <%= check_box("tats", "approve_request", { class: 'tats' }, true, false)%> Approve Appointment <br><br>
+
+
+ <h1> <%=@tat.stat %> </h1>
+
+
+
+ <%= check_box_tag "tats", "approve_request", true %> Approve Appointment <br><br>
+
+
+
+ <% if @tat.stat = true %>
+<h1> SUCCESS!   </h1>
+<%end%>
 
 
 

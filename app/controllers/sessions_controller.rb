@@ -45,6 +45,9 @@ end
         redirect_to root_path    
     end
     
+    def omniauth
+      binding.pry
+    end
    
     
     def session_params 
