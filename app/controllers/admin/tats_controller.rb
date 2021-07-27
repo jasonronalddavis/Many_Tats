@@ -1,7 +1,11 @@
 class Admin::TatsController < ApplicationController
-  helper_method :approve_tat
+ 
+helper_method :validate?
 
-  def new
+
+  
+
+def new
     # raise params.inspect
      @user = User.find(session[:user_id])
      @tat = @user.tats.build
@@ -57,6 +61,7 @@ class Admin::TatsController < ApplicationController
        @tat_artist = @tat.artist
     end
      if session[:artist_id]
+     # binding.pry
      @artist = Artist.find(session[:artist_id])
      @tat = Tat.find(params[:id]) 
   end
@@ -88,20 +93,27 @@ end
   end
     
     def update
+     
       @artists = Artist.all
-      @user = User.find(session[:user_id])
+      if session[:user_id]
       @tat = Tat.find(params[:id])
-      @tat.update(tat_params)
+      @user = User.find(session[:user_id])
+      if @tat.user == @user
       if @tat.valid?
         @tat.update(tat_params)
         redirect_to admin_user_tat_path(@tat)
+      elsif session[:artist_id]
+        @artist = Artist.find(session[:artist_id])
+        redirect_to admin_artist_tat_path(@tat)
       else
         render :edit
-      end
     end
-    
-    
-      
+  end
+end
+end
+
+
+
     def destroy
       @tat = Tat.find(params[:id])
       @tat.destroy
@@ -109,15 +121,22 @@ end
     end
 
   def approve_tat
+   # binding.pry
     @tat = Tat.find(params[:id])
-    @tat.status.update
+    if params[:tat][:stat] == "true"
+      @tat.stat = true
+    elsif params[:tat][:stat] == "false"
+      @tat.stat = false
+    end
+    @tat.save
+    redirect_to admin_root_path
   end
-    
+
     
     
       def tat_params 
        #raise params.inspect
-      params.require(:tat).permit(:id, :appointment_date, :stat, :user_id, :artist_id, :style, :name, :description, :color_range)
+      params.require(:tat).permit(:id, :appointment_date,:approve, :stat, :user_id, :artist_id, :style, :name, :description, :color_range, :status)
     end
 
     end

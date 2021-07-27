@@ -1,7 +1,7 @@
 
+<% if session[:user_id] %>
 
-
-<h1> User: <%= @user.name %></h1><br><br>
+<h1> User: <%= @current_user.name %></h1><br><br>
 
 
 
@@ -17,6 +17,26 @@
 <% @user.artists.each do |artist|%></h2>
     <h2> <%= link_to artist.name, artist_path(artist) %></h2>
     <%end%><br><br>
+
+<% elsif session[:artist_id] %>
+
+
+ <h1> User: <%= @user.name %></h1><br><br>
+
+
+<h1> Users Tats </h1>
+<% @user.tats.each do |tat|%>
+    <h2><%= link_to tat.name, tat_path(tat)%><br>
+<%end%>
+
+
+<h1> Users Artists </h1>
+
+<% @user.artists.each do |artist|%></h2>
+    <h2> <%= link_to artist.name, artist_path(artist) %></h2>
+    <%end%>
+    <%end%><br><br>
+
 
  <%= button_to "Add User", {action: :add_user, id: @user.id }, method: :post %>
 

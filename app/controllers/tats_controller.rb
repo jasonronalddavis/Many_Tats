@@ -35,10 +35,10 @@ end
  
 def show
   if session[:user_id]
-    @artist = Artist.find(params[:artist_id])
-    @tats = @artist.tats.all
-    @users = @artist.users
-    @user = User.find(session[:user_id])
+    @current_user = User.find(session[:user_id])
+    @tat = Tat.find(params[:id])
+    @artist = @tat.artist
+    @user = @tat.user
 elsif session[:artist_id]
   @tat = Tat.find(params[:id])
   @artist = Artist.find(session[:artist_id])
@@ -46,7 +46,6 @@ end
 end
 
 def remove_artist 
-
   @tat = Tat.find(params[:id])
   @artist = Artist.find(session[:artist_id])
   @user = User.find_by_id(@tat.user_id)
@@ -63,13 +62,11 @@ def remove_artist
 end
 
 def update
-  @artists = Artist.all
-  @tat = @user.tats.build(tat_params)
-  if @tat.save
-    redirect_to user_tat_path(@tat)
-  else
-    render :edit
-  end
+ #binding.pry
+  @artist = Artist.find(session[:artist_id])
+  @tat = Tat.find(params[:id])
+  @tat.save
+  redirect_to admin_root_path
 end
 
 
@@ -82,7 +79,7 @@ end
 
 private 
     def tat_params 
-      params.require(:tat).permit(:user_id, :artist_id, :style, :name, :description, :color_range)
+      params.require(:tat).permit(:user_id, :artist_id, :style, :name, :stat, :description, :color_range, :status)
 end
 
 end

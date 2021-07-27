@@ -8,8 +8,12 @@
     <%= label_tag :artist, "Artist" %>
     <%= collection_select :artist, :name, Artist.all, :name, :name, :include_blank => "Leave Blank"  %>
     <br><br>
+    <%= label_tag :email %>
+    <%= text_field_tag :email %>
+    <br><br>
     <%= label_tag :password %>
     <%= password_field_tag :password %>
     <br><br>
-    <%= submit_tag "Sign In" %>
+    <%= submit_tag "Sign In" %><br>
+
 <% end %>

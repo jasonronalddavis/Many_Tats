@@ -3,14 +3,13 @@
 
 <%= form_tag "/signin", method: :post do %>
     <%= label_tag :user %>
-    <%= collection_select :user, :name, User.all, :name, :name, :include_blank => "Leave Blank" %>
+    <%= collection_select :user, :name, User.all, :name, :name %>
     <br><br>
     <%= label_tag :artist, "Artist" %>
-    <%= collection_select :artist, :name, Artist.all, :name, :name, :include_blank => "Leave Blank"  %>
+    <%= text_field_tag :artist %>
     <br><br>
     <%= label_tag :password %>
     <%= password_field_tag :password %>
     <br><br>
-    <%= submit_tag "Sign In" %><br>
-
+    <%= submit_tag "Sign In" %>
 <% end %>

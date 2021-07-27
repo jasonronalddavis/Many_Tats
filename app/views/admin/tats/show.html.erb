@@ -39,27 +39,34 @@
 
  <h3>Tat description: <%= @tat.description%></h3><br>
 
- <h3> Tat color range: <%= @tat.color_range%></h3><br><br>
+ <h3> Tat color range: <%= @tat.color_range%></h3><br>
+
+ <h3> Tat style: <%=@tat.style %> </h3><br>
 
 
 
- <h1> <%=@tat.stat %> </h1>
+ 
+ <%= form_for [:admin,@tat], :url => { :action => "approve_tat" }, method: :post do |f| %>
+    <%= f.label :stat, "Approve Tat", :value => "true" %>
+    <%= f.radio_button :stat, true, :tat => [:stat] %>
+    <%= f.label :stat, "Standby", :value => "false" %>
+    <%= f.radio_button :stat, false, :tat => [:stat] %>
+ <%= f.submit "submit status" %>
+ <%end%>
 
 
 
- <%= check_box_tag "tats", "approve_request", true %> Approve Appointment <br><br>
 
 
-
- <% if @tat.stat = true %>
-<h1> SUCCESS!   </h1>
+<% if @tat.stat == true %>
+<h1> <%= "APPROVED!" %> </h1>
+<%else%>
+ <h1> <%="Approve or standby?"%> </h1>
 <%end%>
 
 
+<%= link_to "decine request", controller: "tats", action: "remove_artist", id: @tat %><br>
 
-
-
- <%= link_to "decine request", controller: "tats", action: "remove_artist", id: @tat %><br>
 
 <%end%>
 

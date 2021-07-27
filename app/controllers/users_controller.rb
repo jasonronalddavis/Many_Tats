@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-    before_action :authenticate_user, only: [:show]
 
     def new
      #binding.pry
@@ -28,8 +27,9 @@ class UsersController < ApplicationController
     end
 
     def show
-  if session[:user_id]
-    @user = User.find(session[:user_id])
+    if session[:user_id]
+    @current_user = User.find(session[:user_id])
+    @user = User.find(params[:id])
     elsif session[:artist_id]
     @artist = Artist.find(session[:artist_id])
     @user = User.find(params[:id])
@@ -43,20 +43,19 @@ def add_user
     @user = User.find(session[:user_id])
     @artist = Artist.find(params[:id])
     @user.artists << @artist 
-    redirect_to admin_user_path(@user)
     elsif session[:artist_id]
         @artist = Artist.find(session[:artist_id])
         @user = User.find(params[:id])
         @artist.users << @user
+    end
     redirect_to admin_artist_path(@artist)
-end
 end
 
     private
 
     def user_params
         
-        params.require(:user).permit( :name, :password)
+        params.require(:user).permit( :id, :name, :password, :provider, :uid, :artist_id)
     end
 
 
