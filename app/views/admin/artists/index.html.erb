@@ -10,26 +10,13 @@
 
 
 
-
-
-
-<h1> Your Artists </h1><br><br>
-<% @user.artists.each do |artist| %>
-<%= link_to artist.name, artist_path(artist) %>  
+<h1> Your Artists: </h1><br>
+<% @artists.all.each do |artist| %>
+<h2> <%=link_to artist.name, artist_path(artist)%><br></h2>
 <%end%>
-<% if @user.artists = [] %>
+<% if @artists.count == 0 %>
 <h1> You have none! </h1>  
-<%end%>
-
-
-
-
-
-
-
-
-
-
+<%end%><br><br>
 
 
 

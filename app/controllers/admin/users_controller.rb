@@ -10,26 +10,20 @@ class Admin::UsersController < Admin::ApplicationController
 
         @user = User.new(user_params)
         @user && @user.authenticate(user_params)    
-        if @user.valid?
-            @user.save
-            session[:user_id] = @user.id
-            redirect_to admin_user_path(@user)
+       if  @user.save
+        session[:user_id] = @user.id
+         redirect_to admin_user_path(@user)
         else
             render :new
         end
     end
+ 
+
 
     def show
-       current_user
        @user = User.find(session[:user_id])
         @tats = @user.tats
         @artists = @user.artists
-        # binding.pry
-        # if current_user.admin == false
-        #     if current_user != @user
-        #         redirect_to root_path
-        #     end
-        # end
     end
 
     def destroy 
@@ -47,7 +41,7 @@ class Admin::UsersController < Admin::ApplicationController
     private
 
     def user_params 
-        params.require(:user).permit( :id,:name, :password)
+        params.require(:user).permit( :id, :name, :email, :password, :provider, :uid, :artist_id)
     end
 
 

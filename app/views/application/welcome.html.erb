@@ -8,6 +8,7 @@
  <%= link_to "Users page", admin_user_path(@user), method: 'get'%><br><br>
  
  <%elsif session[:user_id] %>
+
 <h1> Artist: </h1>
 <h1><%= @artist.name %> </h1> <br><br><br>
 %= link_to "Log Out", signout_path, method: :delete %><br><br>
@@ -15,6 +16,6 @@
 
  <%= link_to "Sign Up as User", new_admin_user_path %><br><br>
  <%= link_to "Sign Up as Artist", new_admin_artist_path %><br><br>
-<%= link_to "Sign in", signin_path%><br><br>
+<%= link_to "Sign in", admin_signin_path%><br><br>
 <%end%>
 </div>

@@ -1,7 +1,5 @@
 class SessionsController < ApplicationController
-  
-  helper_method :Artist?
-  
+
   
   
   
@@ -46,12 +44,24 @@ end
     end
     
     def omniauth
-      binding.pry
-    end
-   
-    
+    # binding.pry
+      @user = User.find_by(email: request.env['omniauth.auth'][:info][:email]) do |u|
+      u.email = request.env['omniauth.auth'][:info][:email]
+      u.uid = request.env['omniauth.auth'][:uid]
+      u.password = SecureRandom.hex(15)
+      end
+    if @user.valid?
+      session[:user_id] = @user.id
+      redirect_to root_path(@user)
+    else
+      redirect_to root_path
+  end
+end
+
+
+
     def session_params 
       # binding.pry
-       params.permit(:user_id, :sessions, :artist_id, :id, :password, :name)
+       params.permit(:user_id, :sessions, :artist_id, :id, :email, :password, :name)
    end
   end

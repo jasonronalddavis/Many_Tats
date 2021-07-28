@@ -12,22 +12,26 @@ class Admin::SessionsController < Admin::ApplicationController
   end
   
   def create
-    @user = User.find_by(name: params[:user][:name])
-    @artist = Artist.find_by(name: params[:artist][:name])
-    if session[:user_id] 
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id  
-    redirect_to admin_user_path(@user)
-    elsif session[:artist_id] 
-      if @artist && @artist.authenticate(params[:password])
-        session[:artist_id] = @artist.id 
-        redirect_to admin_artist_path(@artist)
-     else
-    render :new
+    # binding.pry
+       if params[:user][:name] != ""
+        @user = User.find_by(name: params[:user][:name]) 
+        @user && @user.authenticate(params[:password])
+        session[:user_id] = @user.id  
+      redirect_to admin_user_path(@user)
+       elsif params[:artist][:name] != ""
+        @artist = Artist.find_by(name: params[:artist][:name])
+        @artist && @artist.authenticate(params[:password])
+      session[:artist_id] = @artist.id
+          redirect_to admin_artist_path(@artist)
+      # elsif session[:artist_id]
+      #   redirect_to admin_artists_create(@artist)
+       else
+      render :new
+    end
   end
-  
 
   def omniauth
+    
   end
  
   #button_to always maps to post request
@@ -41,6 +45,7 @@ class Admin::SessionsController < Admin::ApplicationController
     
     def session_params 
       # binding.pry
-       params.permit(:user_id, :sessions, :artist_id, :id, :password, :name)
+       params.permit(:user_id, :sessions, :artist_id, :id, :email, :password, :name)
    end
   end
+end
