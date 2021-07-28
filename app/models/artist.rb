@@ -1,7 +1,6 @@
 class Artist < ApplicationRecord
   has_secure_password
-  belongs_to :user
-  has_many :users
+  has_many :users, foreign_key: "user_id"
   has_many :users, through: :user_artists, source: :user
   has_many :tats
 
