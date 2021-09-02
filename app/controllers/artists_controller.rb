@@ -34,7 +34,6 @@ class ArtistsController < ApplicationController
     end
 
     def show
-
   if session[:user_id]
     @user = User.find(session[:user_id])
     @artist = Artist.find(params[:id])
@@ -49,19 +48,18 @@ end
 
 
 def add_artist
+   # binding.pry
     if session[:user_id]
     @user = User.find(session[:user_id])
     @artist = Artist.find(params[:id])
-    @user.artists << @artist
-    elsif session[:artist_id]
-        @artist = Artist.find(session[:artist_id])
-        @user_artist = Artist.find(params[:id])
-        @artist.artists << @artist 
-    end
-    redirect_to admin_artists_path
+    @added_artist = Artist.find_by_id(@artist.id)
+    @user.user_artists.include?( @added_artist)
+    @user.user_artists << @added_artist
+    else
+ redirect_to admin_user_path
+end
 end
 
-   
 
     def edit
         @artist = Artist.find(params[:id])

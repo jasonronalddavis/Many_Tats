@@ -3,7 +3,7 @@
 
 <h1> User: <%= @user.name %></h1><br><br>
 
-
+<div id="href">
 <%= link_to "Create Tat", new_admin_user_tat_path(@user.id) %><br><br>
 
 <%= link_to "Users tats",admin_user_tats_path(@tats) %><br><br>
@@ -17,3 +17,4 @@
 <%= link_to "Return home", root_path %>
 
 <br>
+</div>

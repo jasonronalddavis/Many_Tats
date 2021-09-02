@@ -43,6 +43,7 @@ gem 'bootstrap-sass'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem "actionview", ">= 5.0.7.2"
+gem "yarn"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

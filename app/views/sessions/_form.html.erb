@@ -1,6 +1,16 @@
 
 <h1>Log In</h1>
 
+<% if @user.errors.any? %>
+<h1> ERRORS: </h1>
+
+<% @user.errors.full_messages.each do |message| %>
+<ul>
+<li><%= message %></li>
+</ul>
+<%end%>
+<%end%>
+
 <%= form_tag "/signin", method: :post do %>
     <%= label_tag :user %>
     <%= collection_select :user, :name, User.all, :name, :name, :include_blank => "Leave Blank" %>

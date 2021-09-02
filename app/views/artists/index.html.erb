@@ -1,9 +1,10 @@
 
-
-
+<div id="href">
+<div id="headline">
 <%if session[:artist_id] %>
-<h1> All Artists </h1>
 
+<h1> All Artists </h1>
+</div>
 <% @artists.each do |artist| %>
 
 <%= link_to artist.name, artist_path(artist) %> <br><br>
@@ -29,3 +30,5 @@
 <% end %>
 <%= link_to "Return home", root_path %><br>
 <%= link_to "Log Out", signout_path, method: :delete %><br><br>
+
+</div>

@@ -22,6 +22,7 @@ def new
        if  @tat.valid?
         @tat.save
         if @tat.artist != nil
+          @user.added_artists << @artist
         add_artist
       end
         redirect_to admin_user_tat_path(@user,@tat)
@@ -45,7 +46,7 @@ def new
           if session[:artist_id]
             @artist = Artist.find(session[:artist_id])
             @tats = @artist.tats
-            @users = @artist.users
+            
           elsif session[:user_id]
           @user = User.find(session[:user_id])
           @tats = @user.tats
@@ -86,7 +87,6 @@ end
       @tat = Tat.find(params[:id])
       if @tat.artist != nil
       @artist = Artist.find_by_id(@tat.artist_id)
-      @users = @artist.users
       else
         @artist = Artist.find_by_id(params[:artist_id])
     end

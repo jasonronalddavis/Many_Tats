@@ -1,9 +1,8 @@
 
 
-
 <%= form_for [:admin,@tat] do |f| %>
     <%= f.hidden_field :user_id %>
- 
+
  <tat_name>
     <h1> Name Your Tat </h1>
  
@@ -42,7 +41,7 @@
    
      <tat_style>
      <h1> Tat Style </h1>
-   
+    
  <%= f.radio_button :style, 'Art Nouveau', :checked => true %> Art Nouveau 
  <%= f.radio_button :style, 'Japanese Traditional', :checked => true %> Japanese Traditional 
  <%= f.radio_button :style, 'cartoony', :checked => true %> cartoony 

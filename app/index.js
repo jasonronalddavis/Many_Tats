@@ -1,0 +1,1 @@
+fetch('https://www.fandango.com/movie-news/fandango-staff-picks-coolest-adventure-films-754297')

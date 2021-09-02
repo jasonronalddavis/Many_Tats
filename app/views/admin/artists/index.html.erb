@@ -14,10 +14,9 @@
 <% @artists.all.each do |artist| %>
 <h2> <%=link_to artist.name, artist_path(artist)%><br></h2>
 <%end%>
-<% if @artists.count == 0 %>
+<% if @artists.count < 1 %>
 <h1> You have none! </h1>  
-<%end%><br><br>
-
+<%end%>
 
 
 
