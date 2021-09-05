@@ -2,7 +2,7 @@ class ArtistsController < ApplicationController
   
     helper_method :add_artist
     
-    
+    helper_method :to_hash
     
     def new
         @artist = Artist.new
@@ -33,6 +33,8 @@ class ArtistsController < ApplicationController
           end
     end
 
+
+
     def show
   if session[:user_id]
     @user = User.find(session[:user_id])
@@ -48,17 +50,18 @@ end
 
 
 def add_artist
-   # binding.pry
+    binding.pry
     if session[:user_id]
     @user = User.find(session[:user_id])
     @artist = Artist.find(params[:id])
-    @added_artist = Artist.find_by_id(@artist.id)
-    @user.user_artists.include?( @added_artist)
-    @user.user_artists << @added_artist
+    @user.user_artists.include?( @artist)
+  @added_atist = @user.user_artists.build(to_hash)
     else
  redirect_to admin_user_path
 end
 end
+
+
 
 
     def edit
@@ -77,8 +80,12 @@ end
 def destroy
 end
 
+def user_artist_params 
+    params.require(@artist.id).permit( :id, :name, :email)
+    end
+
 def artist_params 
-    params.require(:artist).permit( :id, :name, :password, :bio, :user_id)
+    params.require(:artist).permit( :id, :name, :password, :bio, :user_id, :artist)
     end
 
    

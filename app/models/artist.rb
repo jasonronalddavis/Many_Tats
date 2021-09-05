@@ -8,6 +8,17 @@ class Artist < ApplicationRecord
   validates :name, length: { minimum: 3, :too_short => "needs at leat 3 characters" }
 
   validates :name, uniqueness: {message: "has already been taken"}
+
+
+
+  def to_hash
+  @artist.attributes.reject! {|key, value| key == "password_digest" || key == "bio" || key == "artist_id"}
+end
+
+
+
+
+
 end
 
 
