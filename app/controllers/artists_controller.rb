@@ -50,17 +50,18 @@ end
 
 
 def add_artist
-    binding.pry
+ #binding.pry
     if session[:user_id]
     @user = User.find(session[:user_id])
-    @artist = Artist.find(params[:id])
-    @user.user_artists.include?( @artist)
-  @added_atist = @user.user_artists.build(to_hash)
+  @artist = Artist.find(params[:id])
+   @added_artist = UserArtist.create(to_hash)
+   @user.user_artists << @added_artist
+   @added_artist.save
+    redirect_to admin_user_path
     else
  redirect_to admin_user_path
 end
 end
-
 
 
 
@@ -77,14 +78,19 @@ end
 
     private
 
+    def to_hash
+        @artist = Artist.find(params[:id])
+        @artist.attributes.reject! do |key, value| 
+        @added_artist = key == "password_digest" || key == "bio" || key == "artist_id"
+    end  
+    end
+
 def destroy
 end
 
-def user_artist_params 
-    params.require(@artist.id).permit( :id, :name, :email)
-    end
 
 def artist_params 
+
     params.require(:artist).permit( :id, :name, :password, :bio, :user_id, :artist)
     end
 

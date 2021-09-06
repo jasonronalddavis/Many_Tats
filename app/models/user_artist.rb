@@ -3,7 +3,7 @@ class UserArtist < ApplicationRecord
   belongs_to :user
 
 
-  validates :added_artists, absence: true
+
   
   end
   

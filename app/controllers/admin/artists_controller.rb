@@ -3,6 +3,8 @@ class Admin::ArtistsController < Admin::ApplicationController
         @artist = Artist.new
     end
 
+    
+
     def create
     #  binding.pry
  
@@ -19,10 +21,11 @@ class Admin::ArtistsController < Admin::ApplicationController
 
 
     def index
-     #  binding.pry
+     # binding.pry
         if session[:user_id]
         @user = User.find(session[:user_id])
         @artists = @user.added_artists
+        #@artist = user_artists.find_by_id(artist_id)
         elsif session[:artist_id]
             @artist = Artist.find(session[:artist_id])
             @artists = Artist.all
@@ -56,6 +59,8 @@ end
 
 
     private
+
+   
 
     def destroy
         sessions.clear

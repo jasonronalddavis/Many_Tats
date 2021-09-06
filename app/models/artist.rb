@@ -11,10 +11,6 @@ class Artist < ApplicationRecord
 
 
 
-  def to_hash
-  @artist.attributes.reject! {|key, value| key == "password_digest" || key == "bio" || key == "artist_id"}
-end
-
 
 
 
