@@ -2,6 +2,18 @@
 @import "bootstrap";
 
 
+#logo img {
+  position:relative; top:20px;
+  width: 200px;
+}
+
+#ink_1 img {
+  
+  position:relative; top:450px; left: -250px; 
+  width: 100px; z-index: -10
+}
+
+
 body {
     justify-content: center;
     align-items: center;
@@ -12,6 +24,13 @@ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 font-weight: lighter;
 
     }
+
+
+    #useradmin  {
+      position:relative; top:-20px;
+    }
+
+
 
 #all a:hover {
   color: hotpink;
@@ -34,3 +53,50 @@ font-weight: lighter;
   color: hotpink;
   line-height:18pt;
 }
+
+
+#center {
+position:relative; top:100px;
+  text-align: center;
+    }
+
+
+
+#text {
+ justify-content: center;
+    align-items: center;
+    text-align: center; 
+    position:relative; top:100px;
+    }
+
+
+
+ #password {
+ 
+    position:relative; left: 30px;
+    }
+
+
+    #google {
+ 
+    position:relative; left: 20px;
+    }
+
+
+  #user {
+    position:relative; left: 40px;
+    }
+
+ .signin {
+    position:relative; left: -50px; top: -40px;
+      }
+
+
+ #login {
+    position:relative; left: 50px;
+      }
+
+
+#UserArtist {
+     position:relative; top:100px;
+      }

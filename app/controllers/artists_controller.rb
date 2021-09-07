@@ -1,9 +1,6 @@
 class ArtistsController < ApplicationController
   
-    helper_method :add_artist
-    
-    helper_method :to_hash
-    
+   
     def new
         @artist = Artist.new
     end
@@ -49,19 +46,6 @@ end
 
 
 
-def add_artist
- #binding.pry
-    if session[:user_id]
-    @user = User.find(session[:user_id])
-  @artist = Artist.find(params[:id])
-   @added_artist = UserArtist.create(to_hash)
-   @user.user_artists << @added_artist
-   @added_artist.save
-    redirect_to admin_user_path
-    else
- redirect_to admin_user_path
-end
-end
 
 
 
@@ -78,12 +62,14 @@ end
 
     private
 
-    def to_hash
-        @artist = Artist.find(params[:id])
-        @artist.attributes.reject! do |key, value| 
-        @added_artist = key == "password_digest" || key == "bio" || key == "artist_id"
-    end  
-    end
+#     def to_hash
+#         @artist = Artist.find(params[:id])
+#         @artist.attributes.reject! do |key, value| 
+#         @added_artist = key == "password_digest" || key == "bio" || key == "artist_id"
+#     end  
+#     end
+# end
+
 
 def destroy
 end

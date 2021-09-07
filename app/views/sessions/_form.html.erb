@@ -1,5 +1,6 @@
 
-<h1>Log In</h1>
+
+<div id="login"><h1>Log In</h1></div><br><br>
 
 <% if @user.errors.any? %>
 <h1> ERRORS: </h1>
@@ -12,18 +13,22 @@
 <%end%>
 
 <%= form_tag "/signin", method: :post do %>
+    <div id="user"> 
     <%= label_tag :user %>
     <%= collection_select :user, :name, User.all, :name, :name, :include_blank => "Leave Blank" %>
     <br><br>
+    </div>
     <%= label_tag :artist, "Artist" %>
     <%= collection_select :artist, :name, Artist.all, :name, :name, :include_blank => "Leave Blank"  %>
     <br><br>
     <%= label_tag :email %>
     <%= text_field_tag :email %>
     <br><br>
+    <div id="password"> 
     <%= label_tag :password %>
     <%= password_field_tag :password %>
-    <br><br>
+    <div>
+    <br>
     <%= submit_tag "Sign In" %><br>
 
 <% end %>

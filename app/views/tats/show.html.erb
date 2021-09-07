@@ -3,6 +3,8 @@
 
 
 <% if session[:user_id] %>
+<div id="href">
+
 
 <h3> <%= @current_user.name %> </h3> <br><br>
 
@@ -24,6 +26,7 @@
 
  
  <%elsif session[:artist_id]%>
+ <div id="href">
 
 <h1> Artist </h1>
 <h1><%= @artist.name %> </h1> <br><br><br>
@@ -38,6 +41,9 @@
  <h3>Tat description: <%= @tat.description%></h3><br>
 
  <h3> Tat color range: <%= @tat.color_range.to_s%></h3><br>
+
+ <h3> Tat style: <%=@tat.style %> </h3><br>
+
 <%end%>
 
 
@@ -45,3 +51,5 @@
 <%= link_to "Return home", admin_root_path %><br>
 
 <%= link_to "Log Out", signout_path, method: :delete %><br><br>
+
+</div>

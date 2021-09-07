@@ -1,5 +1,7 @@
-
+<div id="User">
 <% if session[:user_id] %>
+
+
 
 <h1> User: <%= @current_user.name %></h1><br><br>
 
@@ -46,3 +48,4 @@
 <%= link_to "Return home", admin_root_path %>
 
 <br>
+</div>

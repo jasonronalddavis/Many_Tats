@@ -1,8 +1,30 @@
 
 
+
+
+
+
+
+
+
+
 <%if session[:user_id] %>
+<div id="useradmin">
+
+<div id="ink_1">
+<%= image_tag("ink_1.png")%>
+</div>
+
+
+
+
+<div id="logo">
+<%= image_tag("manytatslogo.png")%>
+</div>
+
+
 <h3> <%= @user.email %> </h3><br><br>
-<h1> User  </h1>
+<h1> User:  </h1>
 
  <h1><%= @user.name%> </h1> <br><br><br>
  <div id="href">
@@ -11,9 +33,14 @@
 
  <%= link_to "Log Out", signout_path, method: :delete %><br><br>
  <%= link_to "Users page", admin_user_path([:admin],@user.id), method: 'get'%><br><br>
+ 
+ </div>
+ 
+ 
  <% elsif session[:artist_id] %>
 <h1> Artist: </h1>
 <h1><%= @artist.name %> </h1> <br><br><br>
+<div id="href">
 <%= link_to "Artist page", admin_artist_path([:admin],@artist.id), method: 'get'%><br><br>
 <%= link_to "All users", users_path%><br><br>
 
@@ -30,8 +57,13 @@
 <%= link_to "Log Out", signout_path, method: :delete %><br><br>
 
 <% else %>
+<div id="center">
+<h1>
+<div id="href">
  <%= link_to "Sign Up as User", new_admin_user_path %><br><br>
  <%= link_to "Sign Up as Artist", new_admin_artist_path %><br><br>
 <%= link_to "Sign in", signin_path, method: 'get' %><br><br>
 <%end%>
 </div>
+</div>
+</h1>

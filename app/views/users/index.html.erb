@@ -2,6 +2,8 @@
 
 
 <%if session[:artist_id] %>
+<div id="href">
+
 <h1> All Users </h1>
 
 <% @users.each do |user| %>
@@ -12,6 +14,7 @@
 
 
 <% elsif session[:user_id] %>
+<div id="href">
 
 
 <h1><%= @user.name%></h1><br>
@@ -25,3 +28,5 @@
 <% end %>
 <%= link_to "Return home", admin_root_path %><br>
 <%= link_to "Log Out", signout_path, method: :delete %><br><br>
+
+</div>

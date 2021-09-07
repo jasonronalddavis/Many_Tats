@@ -11,6 +11,11 @@ class User < ApplicationRecord
   validates :name, length: { minimum: 3, :too_short => "needs at leat 3 characters" }
 
 
+  
+
+
+
+  
 end
 
 #has_many :artists, foreign_key: "artist_id"

@@ -6,18 +6,18 @@
  
  
  <% if @tat.artist != nil %>
- <h3> Tat artist: <%= link_to @tat_artist.name, artist_path(@tat_artist) %></h3> <br>
+ <h3> Tat artist: </h3> <%= link_to @tat_artist.name, artist_path(@tat_artist) %> <br>
 <%else %>
 <h3> <%= link_to "Browse Artists", artists_path %> </h3><br> 
  <%end%> 
 
- <h3>Tat Description: <%= @tat.description%></h3><br>
+ <h3>Tat Description: </h3> <%= @tat.description %><br>
 
- <h3> Tat Color Range: <%= @tat.color_range%></h3><br>
+ <h3> Tat Color Range: </h3>  <%= @tat.color_range%></h3><br>
 
- <h3> Tat Appointment Date: <%= @tat.appointment_date%></h3><br>
+ <h3> Tat Appointment Date: </h3>  <%= @tat.appointment_date%></h3><br>
 
- <h3> Tat Style: <%= @tat.style%></h3><br>
+ <h3> Tat Style: </h3> <%= @tat.style%></h3><br>
 
 
 
@@ -27,24 +27,25 @@
 
 
  <% elsif session[:artist_id] %>
-
+  
 <h1> Artist: </h1>
-<h1><%= @artist.name %> </h1> <br><br><br>
+
+<h1><%= @artist.name %> </h1> <br><br>
+<div id="href"> 
 
 
+<h2> Tat name: </h2><%= @tat.name %> <br>
 
-<h2> Tat name: <%= @tat.name %> </h2><br><br>
+ <h3>Tat artist: </h3><%= @tat.artist.name%><br>
 
- <h3>Tat artist: <%= @tat.artist.name%></h3><br>
+ <h3>Tat description:</h3> <%= @tat.description%><br>
 
- <h3>Tat description: <%= @tat.description%></h3><br>
+ <h3> Tat color range: </h3><%= @tat.color_range%><br>
 
- <h3> Tat color range: <%= @tat.color_range%></h3><br>
-
- <h3> Tat style: <%=@tat.style %> </h3><br>
-
+ <h3> Tat style:</h3><%=@tat.style %> <br><br><br>
 
 
+ </div>
  
  <%= form_for [:admin,@tat], :url => { :action => "approve_tat" }, method: :post do |f| %>
     <%= f.label :stat, "Approve Tat", :value => "true" %>
