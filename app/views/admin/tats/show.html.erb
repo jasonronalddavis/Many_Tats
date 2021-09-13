@@ -1,6 +1,6 @@
 <div id="href">
 <% if session[:user_id] %>
-<h1> User: <%= @user.name%> </h1><br><br>
+<h1> Logged in as User: <%= @user.name%> </h1><br><br>
  
  <h2> Tat Name: <%= @tat.name %> </h2><br>
  
@@ -19,6 +19,16 @@
 
  <h3> Tat Style: </h3> <%= @tat.style%></h3><br>
 
+<% if @tat.stat == true %>
+ 
+<h1> Appointment Approved </h1> <br>
+
+<% else %>
+
+ <h1> Appointment Pending </h1> <br>
+
+<%end%>
+
 
 
  <%= button_to 'Delete Tat', @tat, method: :delete, data: { confirm: 'Are You sure?' }%><br>
@@ -28,10 +38,13 @@
 
  <% elsif session[:artist_id] %>
   
-<h1> Artist: </h1>
+<h1> Logged in as Artist: </h1>
 
 <h1><%= @artist.name %> </h1> <br><br>
 <div id="href"> 
+
+
+<h2> Tat user: </h2><%= @tat.user.name %> <br>
 
 
 <h2> Tat name: </h2><%= @tat.name %> <br>

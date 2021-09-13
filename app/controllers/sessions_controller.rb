@@ -20,23 +20,22 @@ class SessionsController < ApplicationController
     # binding.pry
        if params[:user][:name] != ""
         @user = User.find_by(name: params[:user][:name]) 
-       if @user && @user.authenticate(params[:password])
+       if @user && @user.authenticate(params[:password]) && @user.valid?
         session[:user_id] = @user.id  
       redirect_to admin_user_path(@user)
-    end
+       else 
+        redirect_to root_path
+       end
        elsif params[:artist][:name] != ""
         @artist = Artist.find_by(name: params[:artist][:name])
-       if @artist && @artist.authenticate(params[:password])
+       if @artist && @artist.authenticate(params[:password]) && @artist.valid?
       session[:artist_id] = @artist.id
           redirect_to admin_artist_path(@artist)
-        end
-
-
-        
        else
-      render :new
+      redirect_to root_path
     end
   end
+end
 
 
     def destroy 

@@ -16,6 +16,17 @@
 </div>
 
 
+<div id="ink_2">
+<%= image_tag("ink_2.png")%>
+</div>
+
+
+
+<div id="ink_3">
+<%= image_tag("ink_3.png")%>
+</div>
+
+
 
 
 <div id="logo">
@@ -24,7 +35,7 @@
 
 
 <h3> <%= @user.email %> </h3><br><br>
-<h1> User:  </h1>
+<h1> Logged in as User:  </h1>
 
  <h1><%= @user.name%> </h1> <br><br><br>
  <div id="href">
@@ -38,7 +49,7 @@
  
  
  <% elsif session[:artist_id] %>
-<h1> Artist: </h1>
+<h1> Logged in as Artist: </h1>
 <h1><%= @artist.name %> </h1> <br><br><br>
 <div id="href">
 <%= link_to "Artist page", admin_artist_path([:admin],@artist.id), method: 'get'%><br><br>

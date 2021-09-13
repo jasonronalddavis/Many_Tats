@@ -1,3 +1,7 @@
+
+  
+
+
 <%=form_for [:admin,@artist] do |f| %>
     <%= f.label :name %><br>
     <%= f.text_field :name, class: "NAME" %>
@@ -6,3 +10,15 @@
     <%= f.text_field :password %>
     <%= f.submit "Create Artist" %> 
 <% end %> 
+
+
+<% if @artist.errors.any? %>
+<h1> ERRORS: </h1>
+
+<% 
+@artist.errors.full_messages.each do |message| %>
+<ul>
+<li><%= message %></li>
+</ul>
+<%end%>
+<%end%>

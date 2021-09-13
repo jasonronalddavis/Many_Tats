@@ -14,3 +14,16 @@
     <%= submit_tag "Sign In" %><br>
 
 <% end %>
+
+
+
+<% if errors.any? %>
+<h1> ERRORS: </h1>
+
+<% 
+errors.full_messages.each do |message| %>
+<ul>
+<li><%= message %></li>
+</ul>
+<%end%>
+<%end%>

@@ -10,13 +10,15 @@ class Admin::ArtistsController < Admin::ApplicationController
  
     @artist = Artist.new(artist_params)
     @artist && @artist.authenticate(artist_params)   
-           if  @artist.save
+    if @artist.valid?
+          @artist.save
             session[:artist_id] = @artist.id
             redirect_to admin_artist_path(@artist)
         else
-            redirect_to admin_root_path
+            render :new
         end
     end
+
 
 
 
@@ -53,9 +55,13 @@ end
 
     def update
         @artist = Artist.find(params[:id])
+        if @artist.valid?
         @artist.update(artist_params)
         redirect_to admin_artist_path(@artist)
+        else
+            render :new
     end
+end
 
 
     private

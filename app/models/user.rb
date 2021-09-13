@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
 
  #validates :name, presence: { message: "must be given please" }
-  validates :name, length: { minimum: 3, :too_short => "needs at leat 3 characters" }
+ validates_length_of :name, :within => 6..20, :too_long => "needs fewer than 20 character", :too_short => "needs at leat 6 characters"
 
 
   

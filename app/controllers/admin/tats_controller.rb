@@ -2,7 +2,7 @@ class Admin::TatsController < ApplicationController
  
 helper_method :validate?
 
-
+helper_method :add_tat_artist
   
 
 def new
@@ -22,8 +22,9 @@ def new
        if  @tat.valid?
         @tat.save
         if @tat.artist != nil
-          @user.added_artists << @artist
-        add_artist
+          add_artist
+          # @artist = @tat.artist
+          # @user.added_artists << @artist
       end
         redirect_to admin_user_tat_path(@user,@tat)
       else
@@ -36,9 +37,10 @@ def new
       def add_artist
         @user = User.find(session[:user_id])
         @artist = Artist.find_by_id(@tat.artist_id)
-        @user.artists << @artist 
+        if !@user.added_artists.include?(@artist)
+        @user.added_artists  << @artist 
     end
-    
+  end
     
     
     
@@ -85,7 +87,7 @@ end
       @artists = Artist.all
       @user = User.find(session[:user_id])
       @tat = Tat.find(params[:id])
-      if @tat.artist != nil
+      if @tat.artist_id != nil
       @artist = Artist.find_by_id(@tat.artist_id)
       else
         @artist = Artist.find_by_id(params[:artist_id])
@@ -93,8 +95,9 @@ end
   end
     
     def update
-     
+     #binding.pry
       @artists = Artist.all
+  
       if session[:user_id]
       @tat = Tat.find(params[:id])
       @user = User.find(session[:user_id])

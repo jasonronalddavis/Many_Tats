@@ -6,6 +6,17 @@ protect_from_forgery with: :exception
 helper_method :current_user, :logged_in?, :authenticate_user
 
 
+def add_tat_artist
+  # binding.pry
+if session[:user_id]    
+@user = User.find(session[:user_id])
+@artists = Artist.all
+ @added_artist = Artist.find_by_id(@tat.artist_id)
+if !@user.added_artists.include?(@added_artist)
+@user.added_artists << @added_artist
+end
+end
+end
 
 
   
