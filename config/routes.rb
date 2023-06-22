@@ -13,19 +13,6 @@ Rails.application.routes.draw do
 
 
 
-  get 'user/new'
-  get 'user/create'
-  get 'user/show'
-  get 'user/edit'
-  get 'user/update'
-  get 'user/destroy'
-  get 'user/index'
-  get 'user/new'
-  get 'user/create'
-  get 'user/show'
-  get 'user/edit'
-  get 'user/update'
-  get 'user/destroy'
   root to: 'application#welcome'
   
 
@@ -73,14 +60,20 @@ end
 end
 end
 
-#w/o admin
+
 
 
 resources :tats
+get 'about', to: 'tats#about'
+post 'about', to: 'tats#about'
+
+
+
+
 
 resources :users
 get 'users/add_user'
-post 'users/add_user'
+
 
 
 

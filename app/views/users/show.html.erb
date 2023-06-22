@@ -7,14 +7,14 @@
 
 
 
-<h1> Users Tats </h1>
+<h1> <%= @user.name%>'s Tats </h1>
 <% @user.tats.each do |tat|%>
     <h2><%= link_to tat.name, tat_path(tat)%><br>
 <%end%>
 
 
 
-<h1> Users Artists </h1>
+<h1> <%= @user.name%>'s Artists </h1>
 
 <% @user.artists.each do |artist|%></h2>
     <h2> <%= link_to artist.name, artist_path(artist) %></h2>

@@ -28,5 +28,6 @@ User can create, edit and destroy Tat object
 Artist can approve Tat request.
  
 
+#pg_ctl -D /usr/local/var/postgres_dev -l logfile s
 
 

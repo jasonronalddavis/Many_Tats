@@ -14,7 +14,7 @@ end
    
   def create
   
-  @user =  User.find(session[:user_id])
+    @user =  User.find(session[:user_id])
     @tat = @user.tats.find(tat_params)
    if  @tat.save
     redirect_to user_tat_path(@tat)

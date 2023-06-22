@@ -17,9 +17,22 @@
     <% @tats.each  do |tat| %>
         <%= link_to tat.name, admin_user_tat_path(@user,tat)%><br><br>
         <% end %>
-        <% end %> 
- 
+  
+        
+ <% else%>
+
+<% @tats.each do |tat| %>
+<%  tat %>
+<%= link_to tat.name, tat_path(tat)%><br><br>
+<% end %>
+
+<% end %>
+
+
 
 <%= link_to "Log Out", signout_path, method: :delete %><br><br>
+
+
+<%= link_to "About Page", about_path, method: :get %><br><br>
 
 </div>

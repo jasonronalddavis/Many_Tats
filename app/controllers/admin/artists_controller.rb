@@ -26,7 +26,7 @@ class Admin::ArtistsController < Admin::ApplicationController
      # binding.pry
         if session[:user_id]
         @user = User.find(session[:user_id])
-        @artists = @user.added_artists
+        @artists = @user.x
         #@artist = user_artists.find_by_id(artist_id)
         elsif session[:artist_id]
             @artist = Artist.find(session[:artist_id])
